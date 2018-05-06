@@ -15,6 +15,7 @@ class Possibility(private val seed: Long = Random().nextLong()) {
 
     @JvmOverloads
     fun bool(likelihood: Int = 50): Boolean {
+        CheckMate.check().intValue(likelihood).between(0).and(100).inclusive().validate()
         return random.nextBoolean(likelihood * 0.01)
     }
 

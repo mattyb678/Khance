@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static xyz.mattyb.datafaker.testutils.TestUtils.thousand;
 
 public class BoolPossibilityTest {
@@ -46,5 +47,14 @@ public class BoolPossibilityTest {
         });
 
         assertThat(trueCount.get(), is(greaterThan(900)));
+    }
+
+    @Test
+    public void testBool_LikelihoodOutOfRange() {
+        final Possibility possibility = FakerFactory.possibility();
+
+        assertThrows(IllegalArgumentException.class, () -> possibility.bool(-6));
+
+        assertThrows(IllegalArgumentException.class, () -> possibility.bool(19_000));
     }
 }
