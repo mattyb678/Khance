@@ -10,7 +10,10 @@ class Possibility(private val seed: Long = Random().nextLong()) {
     private val random: MersenneTwisterFast = MersenneTwisterFast(seed)
 
     companion object {
-        val ALPHA_CHARS: CharArray = "abcdefghijklmnopqrstuvwxyz".toCharArray()
+        private val alphabet: String = "abcdefghijklmnopqrstuvwxyz"
+        val LOWER_ALPHA_CHARS: CharArray = alphabet.toCharArray()
+        val UPPER_ALPHA_CHARS: CharArray = alphabet.toUpperCase().toCharArray()
+        val ALL_ALPHA_CHARS: CharArray = LOWER_ALPHA_CHARS + UPPER_ALPHA_CHARS;
     }
 
     @JvmOverloads
@@ -28,16 +31,12 @@ class Possibility(private val seed: Long = Random().nextLong()) {
 
     @JvmOverloads
     fun letter(casing: Casing = Casing.LOWER): String {
-        val randomIndex: Int = integer(0, ALPHA_CHARS.size - 1)
-        return ALPHA_CHARS[randomIndex].toString().correctCasing(casing)
-    }
-
-    private fun String.correctCasing(casing: Casing): String {
-        if (casing == Casing.LOWER) {
-            return this.toLowerCase()
-        } else if (casing == Casing.UPPER) {
-            return this.toUpperCase()
+        val charArray: CharArray = when (casing) {
+            Casing.LOWER -> LOWER_ALPHA_CHARS
+            Casing.UPPER -> UPPER_ALPHA_CHARS
+            else -> ALL_ALPHA_CHARS
         }
-        return this
+        val randomIndex: Int = integer(0, charArray.size - 1)
+        return charArray[randomIndex].toString()
     }
 }

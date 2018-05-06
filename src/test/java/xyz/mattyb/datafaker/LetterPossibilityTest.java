@@ -31,4 +31,15 @@ public class LetterPossibilityTest {
             assertThat(letter, matchesPattern("[A-Z]"));
         });
     }
+
+    @Test
+    public void testLetter_MixedCasing() {
+        final Possibility possibility = FakerFactory.possibility();
+
+        thousand(i -> {
+            final String letter = possibility.letter(Casing.MIXED);
+            assertThat(letter.length(), is(1));
+            assertThat(letter, matchesPattern("[a-zA-Z]"));
+        });
+    }
 }
