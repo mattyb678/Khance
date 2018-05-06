@@ -5,7 +5,7 @@ import xyz.mattyb.datafaker.enums.Casing
 import java.util.*
 import kotlin.math.floor
 
-class Faker(private val seed: Long = Random().nextLong()) {
+class Possibility(private val seed: Long = Random().nextLong()) {
 
     private val random: MersenneTwisterFast = MersenneTwisterFast(seed)
 

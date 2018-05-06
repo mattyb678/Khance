@@ -3,23 +3,23 @@ package xyz.mattyb.datafaker
 object FakerFactory {
 
     /**
-     * Creates a [Faker] with a random seed.
+     * Creates a [Possibility] with a random seed.
      *
-     * @return a [Faker] instance with a random seed.
+     * @return a [Possibility] instance with a random seed.
      */
     @JvmStatic
-    fun faker(): Faker {
-        return Faker()
+    fun possibility(): Possibility {
+        return Possibility()
     }
 
     /**
-     * Creates a [Faker] with the specified seed.
+     * Creates a [Possibility] with the specified seed.
      *
-     * @param seed the seed for the faker.
-     * @return a [Faker] instance with the specified seed.
+     * @param seed the seed for the possibility.
+     * @return a [Possibility] instance with the specified seed.
      */
     @JvmStatic
-    fun faker(seed: Long): Faker {
-        return Faker(seed)
+    fun possibility(seed: Long): Possibility {
+        return Possibility(seed)
     }
 }

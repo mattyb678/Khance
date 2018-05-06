@@ -9,14 +9,14 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static xyz.mattyb.datafaker.testutils.TestUtils.thousand;
 
-public class IntegerFakerTest {
+public class IntegerPossibilityTest {
 
     @Test
     public void testInteger_ReturnsInteger() {
-        final Faker faker = FakerFactory.faker();
+        final Possibility possibility = FakerFactory.possibility();
         final AtomicInteger positive = new AtomicInteger(0);
         thousand((iteration) -> {
-            int rand = faker.integer(-9, 9);
+            int rand = possibility.integer(-9, 9);
             if (rand > 0) {
                 positive.incrementAndGet();
             }
@@ -28,29 +28,29 @@ public class IntegerFakerTest {
 
     @Test
     public void testInteger_ZeroMin() {
-        final Faker faker = FakerFactory.faker();
-        thousand((iteration) -> assertThat(faker.integer(0), is(greaterThan(0))));
+        final Possibility possibility = FakerFactory.possibility();
+        thousand((iteration) -> assertThat(possibility.integer(0), is(greaterThan(0))));
     }
 
     @Test
     public void testInteger_NegativeMin() {
-        final Faker faker = FakerFactory.faker();
-        thousand((iteration) -> assertThat(faker.integer(-25), is(greaterThan(-26))));
+        final Possibility possibility = FakerFactory.possibility();
+        thousand((iteration) -> assertThat(possibility.integer(-25), is(greaterThan(-26))));
     }
 
     @Test
     public void testInteger_BothNegative() {
-        final Faker faker = FakerFactory.faker();
-        thousand((iteration) -> assertThat(faker.integer(-25, -1), is(allOf(greaterThan(-26), lessThan(0)))));
+        final Possibility possibility = FakerFactory.possibility();
+        thousand((iteration) -> assertThat(possibility.integer(-25, -1), is(allOf(greaterThan(-26), lessThan(0)))));
     }
 
     @Test
     public void testInteger_Abs() {
-        final Faker faker = FakerFactory.faker();
+        final Possibility possibility = FakerFactory.possibility();
         final AtomicInteger count = new AtomicInteger(0);
 
         thousand(iteration -> {
-            if (Math.abs(faker.integer(-1, 1_000_000)) < 2) {
+            if (Math.abs(possibility.integer(-1, 1_000_000)) < 2) {
                 count.incrementAndGet();
             }
         });
@@ -60,9 +60,9 @@ public class IntegerFakerTest {
 
     @Test
     public void testInteger_MinGreater() {
-        final Faker faker = FakerFactory.faker();
+        final Possibility possibility = FakerFactory.possibility();
         assertThrows(IllegalArgumentException.class, () -> {
-            faker.integer(10_000, 5);
+            possibility.integer(10_000, 5);
         });
     }
 }
