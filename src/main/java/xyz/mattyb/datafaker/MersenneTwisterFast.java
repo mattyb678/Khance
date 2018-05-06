@@ -211,26 +211,6 @@ public strictfp class MersenneTwisterFast implements Serializable
     private double __nextNextGaussian;
     private boolean __haveNextNextGaussian;
 
-    /** Returns true if the MersenneTwisterFast's current internal state is equal to another MersenneTwisterFast.
-     This is roughly the same as equals(other), except that it compares based on value but does not
-     guarantee the contract of immutability (obviously random number generators are immutable).
-     Note that this does NOT check to see if the internal gaussian storage is the same
-     for both.  You can guarantee that the internal gaussian storage is the same (and so the
-     nextGaussian() methods will return the same values) by calling clearGaussian() on both
-     objects. */
-    public boolean stateEquals(MersenneTwisterFast other)
-    {
-        if (other == this) return true;
-        if (other == null)return false;
-
-        if (mti != other.mti) return false;
-        for(int x=0;x<mag01.length;x++)
-            if (mag01[x] != other.mag01[x]) return false;
-        for(int x=0;x<mt.length;x++)
-            if (mt[x] != other.mt[x]) return false;
-        return true;
-    }
-
     /** Reads the entire state of the MersenneTwister RNG from the stream */
     public void readState(DataInputStream stream) throws IOException
     {
@@ -447,54 +427,6 @@ public strictfp class MersenneTwisterFast implements Serializable
 
         return (boolean)((y >>> 31) != 0);
     }
-
-
-
-    /** This generates a coin flip with a probability <tt>probability</tt>
-     of returning true, else returning false.  <tt>probability</tt> must
-     be between 0.0 and 1.0, inclusive.   Not as precise a random real
-     event as nextBoolean(double), but twice as fast. To explicitly
-     use this, remember you may need to cast to float first. */
-
-    public boolean nextBoolean(float probability)
-    {
-        int y;
-
-        if (probability < 0.0f || probability > 1.0f)
-            throw new IllegalArgumentException ("probability must be between 0.0 and 1.0 inclusive.");
-        if (probability==0.0f) return false;            // fix half-open issues
-        else if (probability==1.0f) return true;        // fix half-open issues
-        if (mti >= N)   // generate N words at one time
-        {
-            int kk;
-            final int[] mt = this.mt; // locals are slightly faster
-            final int[] mag01 = this.mag01; // locals are slightly faster
-
-            for (kk = 0; kk < N - M; kk++)
-            {
-                y = (mt[kk] & UPPER_MASK) | (mt[kk+1] & LOWER_MASK);
-                mt[kk] = mt[kk+M] ^ (y >>> 1) ^ mag01[y & 0x1];
-            }
-            for (; kk < N-1; kk++)
-            {
-                y = (mt[kk] & UPPER_MASK) | (mt[kk+1] & LOWER_MASK);
-                mt[kk] = mt[kk+(M-N)] ^ (y >>> 1) ^ mag01[y & 0x1];
-            }
-            y = (mt[N-1] & UPPER_MASK) | (mt[0] & LOWER_MASK);
-            mt[N-1] = mt[M-1] ^ (y >>> 1) ^ mag01[y & 0x1];
-
-            mti = 0;
-        }
-
-        y = mt[mti++];
-        y ^= y >>> 11;                          // TEMPERING_SHIFT_U(y)
-        y ^= (y << 7) & TEMPERING_MASK_B;       // TEMPERING_SHIFT_S(y)
-        y ^= (y << 15) & TEMPERING_MASK_C;      // TEMPERING_SHIFT_T(y)
-        y ^= (y >>> 18);                        // TEMPERING_SHIFT_L(y)
-
-        return (y >>> 8) / ((float)(1 << 24)) < probability;
-    }
-
 
     /** This generates a coin flip with a probability <tt>probability</tt>
      of returning true, else returning false.  <tt>probability</tt> must
