@@ -14,6 +14,11 @@ class Possibility(private val seed: Long = Random().nextLong()) {
     }
 
     @JvmOverloads
+    fun bool(likelihood: Int = 50): Boolean {
+        return random.nextBoolean(likelihood * 0.01)
+    }
+
+    @JvmOverloads
     fun integer(min: Int = Int.MIN_VALUE, max: Int = Int.MAX_VALUE): Int {
         CheckMate.check().`is`(max >= min).truthy().validate()
         val diff: Double = (max - min.toDouble())
