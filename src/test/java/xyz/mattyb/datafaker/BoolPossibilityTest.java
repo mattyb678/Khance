@@ -13,7 +13,7 @@ public class BoolPossibilityTest {
 
     @Test
     public void testBool() {
-        final Possibility possibility = FakerFactory.possibility();
+        final Possibility possibility = PossibilityFactory.possibility();
         final AtomicInteger trueCount = new AtomicInteger(0);
 
         thousand(i -> {
@@ -27,7 +27,7 @@ public class BoolPossibilityTest {
 
     @Test
     public void testBool_Likelihood() {
-        final Possibility possibility = FakerFactory.possibility();
+        final Possibility possibility = PossibilityFactory.possibility();
         final AtomicInteger trueCount = new AtomicInteger(0);
 
         thousand(i -> {
@@ -51,7 +51,7 @@ public class BoolPossibilityTest {
 
     @Test
     public void testBool_LikelihoodOutOfRange() {
-        final Possibility possibility = FakerFactory.possibility();
+        final Possibility possibility = PossibilityFactory.possibility();
 
         assertThrows(IllegalArgumentException.class, () -> possibility.bool(-6));
 

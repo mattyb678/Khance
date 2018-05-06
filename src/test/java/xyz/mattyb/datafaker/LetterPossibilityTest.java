@@ -13,7 +13,7 @@ public class LetterPossibilityTest {
 
     @Test
     public void testLetter() {
-        final Possibility possibility = FakerFactory.possibility();
+        final Possibility possibility = PossibilityFactory.possibility();
 
         thousand(i -> {
             final String letter = possibility.letter();
@@ -24,7 +24,7 @@ public class LetterPossibilityTest {
 
     @Test
     public void testChar() {
-        final Possibility possibility = FakerFactory.possibility();
+        final Possibility possibility = PossibilityFactory.possibility();
 
         thousand(i -> {
             final char character = possibility.character();
@@ -34,7 +34,7 @@ public class LetterPossibilityTest {
 
     @Test
     public void testLetter_UpperCasing() {
-        final Possibility possibility = FakerFactory.possibility();
+        final Possibility possibility = PossibilityFactory.possibility();
 
         thousand(i -> {
             final String letter = possibility.letter(Casing.UPPER);
@@ -45,7 +45,7 @@ public class LetterPossibilityTest {
 
     @Test
     public void testChar_UpperCasing() {
-        final Possibility possibility = FakerFactory.possibility();
+        final Possibility possibility = PossibilityFactory.possibility();
 
         thousand(i -> {
             final char character = possibility.character(Casing.UPPER);
@@ -55,7 +55,7 @@ public class LetterPossibilityTest {
 
     @Test
     public void testLetter_MixedCasing() {
-        final Possibility possibility = FakerFactory.possibility();
+        final Possibility possibility = PossibilityFactory.possibility();
 
         thousand(i -> {
             final String letter = possibility.letter(Casing.MIXED);
@@ -66,7 +66,7 @@ public class LetterPossibilityTest {
 
     @Test
     public void testChar_MixedCasing() {
-        final Possibility possibility = FakerFactory.possibility();
+        final Possibility possibility = PossibilityFactory.possibility();
 
         thousand(i -> {
             final char character = possibility.character(Casing.MIXED);
@@ -76,7 +76,7 @@ public class LetterPossibilityTest {
 
     @Test
     public void testChar_Pool() {
-        final Possibility possibility = FakerFactory.possibility();
+        final Possibility possibility = PossibilityFactory.possibility();
 
         thousand(i -> {
             final char character = possibility.character(Casing.LOWER, "abcdef");
@@ -86,7 +86,7 @@ public class LetterPossibilityTest {
 
     @Test
     public void testChar_PoolNumbers() {
-        final Possibility possibility = FakerFactory.possibility();
+        final Possibility possibility = PossibilityFactory.possibility();
 
         thousand(i -> {
             final char character = possibility.character(Casing.LOWER, "0123456789");
@@ -96,7 +96,7 @@ public class LetterPossibilityTest {
 
     @Test
     public void testHex() {
-        final Possibility possibility = FakerFactory.possibility();
+        final Possibility possibility = PossibilityFactory.possibility();
 
         thousand(i -> {
             final char character = possibility.hex();
@@ -106,7 +106,7 @@ public class LetterPossibilityTest {
 
     @Test
     public void testHex_Upper() {
-        final Possibility possibility = FakerFactory.possibility();
+        final Possibility possibility = PossibilityFactory.possibility();
 
         thousand(i -> {
             final char character = possibility.hex(Casing.UPPER);

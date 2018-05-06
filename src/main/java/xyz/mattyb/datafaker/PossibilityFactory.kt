@@ -1,6 +1,6 @@
 package xyz.mattyb.datafaker
 
-object FakerFactory {
+object PossibilityFactory {
 
     /**
      * Creates a [Possibility] with a random seed.
