@@ -1,2 +1,2 @@
-# DataFaker [![Build Status](https://travis-ci.org/mattyb678/DataFaker.svg?branch=master)](https://travis-ci.org/mattyb678/DataFaker) [![GitHub license](https://img.shields.io/github/license/mattyb678/DataFaker.svg)](https://github.com/mattyb678/DataFaker/blob/master/LICENSE)
+# DataFaker [![Build Status](https://travis-ci.org/mattyb678/DataFaker.svg?branch=master)](https://travis-ci.org/mattyb678/DataFaker) [![Coverage Status](https://coveralls.io/repos/github/mattyb678/DataFaker/badge.svg?branch=master)](https://coveralls.io/github/mattyb678/DataFaker?branch=master) [![GitHub license](https://img.shields.io/github/license/mattyb678/DataFaker.svg)](https://github.com/mattyb678/DataFaker/blob/master/LICENSE)
 Generate realistic fake data for testing
