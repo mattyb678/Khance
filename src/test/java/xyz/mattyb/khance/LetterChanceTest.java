@@ -1,22 +1,22 @@
-package xyz.mattyb.datafaker;
+package xyz.mattyb.khance;
 
 import org.junit.jupiter.api.Test;
-import xyz.mattyb.datafaker.enums.Casing;
+import xyz.mattyb.khance.enums.Casing;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static xyz.mattyb.datafaker.testutils.CharacterMatchesPattern.charMatchesPattern;
-import static xyz.mattyb.datafaker.testutils.MatchesPattern.matchesPattern;
-import static xyz.mattyb.datafaker.testutils.TestUtils.thousand;
+import static xyz.mattyb.khance.testutils.CharacterMatchesPattern.charMatchesPattern;
+import static xyz.mattyb.khance.testutils.MatchesPattern.matchesPattern;
+import static xyz.mattyb.khance.testutils.TestUtils.thousand;
 
-public class LetterPossibilityTest {
+public class LetterChanceTest {
 
     @Test
     public void testLetter() {
-        final Possibility possibility = PossibilityFactory.possibility();
+        final Chance chance = ChanceFactory.chance();
 
         thousand(i -> {
-            final String letter = possibility.letter();
+            final String letter = chance.letter();
             assertThat(letter.length(), is(1));
             assertThat(letter, matchesPattern("[a-z]"));
         });
@@ -24,20 +24,20 @@ public class LetterPossibilityTest {
 
     @Test
     public void testChar() {
-        final Possibility possibility = PossibilityFactory.possibility();
+        final Chance chance = ChanceFactory.chance();
 
         thousand(i -> {
-            final char character = possibility.character();
+            final char character = chance.character();
             assertThat(character, charMatchesPattern("[a-z]"));
         });
     }
 
     @Test
     public void testLetter_UpperCasing() {
-        final Possibility possibility = PossibilityFactory.possibility();
+        final Chance chance = ChanceFactory.chance();
 
         thousand(i -> {
-            final String letter = possibility.letter(Casing.UPPER);
+            final String letter = chance.letter(Casing.UPPER);
             assertThat(letter.length(), is(1));
             assertThat(letter, matchesPattern("[A-Z]"));
         });
@@ -45,20 +45,20 @@ public class LetterPossibilityTest {
 
     @Test
     public void testChar_UpperCasing() {
-        final Possibility possibility = PossibilityFactory.possibility();
+        final Chance chance = ChanceFactory.chance();
 
         thousand(i -> {
-            final char character = possibility.character(Casing.UPPER);
+            final char character = chance.character(Casing.UPPER);
             assertThat(character, charMatchesPattern("[A-Z]"));
         });
     }
 
     @Test
     public void testLetter_MixedCasing() {
-        final Possibility possibility = PossibilityFactory.possibility();
+        final Chance chance = ChanceFactory.chance();
 
         thousand(i -> {
-            final String letter = possibility.letter(Casing.MIXED);
+            final String letter = chance.letter(Casing.MIXED);
             assertThat(letter.length(), is(1));
             assertThat(letter, matchesPattern("[a-zA-Z]"));
         });
@@ -66,50 +66,50 @@ public class LetterPossibilityTest {
 
     @Test
     public void testChar_MixedCasing() {
-        final Possibility possibility = PossibilityFactory.possibility();
+        final Chance chance = ChanceFactory.chance();
 
         thousand(i -> {
-            final char character = possibility.character(Casing.MIXED);
+            final char character = chance.character(Casing.MIXED);
             assertThat(character, charMatchesPattern("[a-zA-Z]"));
         });
     }
 
     @Test
     public void testChar_Pool() {
-        final Possibility possibility = PossibilityFactory.possibility();
+        final Chance chance = ChanceFactory.chance();
 
         thousand(i -> {
-            final char character = possibility.character(Casing.LOWER, "abcdef");
+            final char character = chance.character(Casing.LOWER, "abcdef");
             assertThat(character, charMatchesPattern("[abcdef]"));
         });
     }
 
     @Test
     public void testChar_PoolNumbers() {
-        final Possibility possibility = PossibilityFactory.possibility();
+        final Chance chance = ChanceFactory.chance();
 
         thousand(i -> {
-            final char character = possibility.character(Casing.LOWER, "0123456789");
+            final char character = chance.character(Casing.LOWER, "0123456789");
             assertThat(character, charMatchesPattern("[0-9]"));
         });
     }
 
     @Test
     public void testHex() {
-        final Possibility possibility = PossibilityFactory.possibility();
+        final Chance chance = ChanceFactory.chance();
 
         thousand(i -> {
-            final char character = possibility.hex();
+            final char character = chance.hex();
             assertThat(character, charMatchesPattern("[0-9a-f]"));
         });
     }
 
     @Test
     public void testHex_Upper() {
-        final Possibility possibility = PossibilityFactory.possibility();
+        final Chance chance = ChanceFactory.chance();
 
         thousand(i -> {
-            final char character = possibility.hex(Casing.UPPER);
+            final char character = chance.hex(Casing.UPPER);
             assertThat(character, charMatchesPattern("[0-9A-F]"));
         });
     }

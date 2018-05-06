@@ -1,4 +1,4 @@
-package xyz.mattyb.datafaker.testutils;
+package xyz.mattyb.khance.testutils;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;

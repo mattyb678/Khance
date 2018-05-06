@@ -1,11 +1,11 @@
-package xyz.mattyb.datafaker
+package xyz.mattyb.khance
 
 import xyz.mattyb.checkmate.CheckMate
-import xyz.mattyb.datafaker.enums.Casing
+import xyz.mattyb.khance.enums.Casing
 import java.util.*
 import kotlin.math.floor
 
-class Possibility(private val seed: Long = Random().nextLong()) {
+class Chance(private val seed: Long = Random().nextLong()) {
 
     private val random: MersenneTwisterFast = MersenneTwisterFast(seed)
 

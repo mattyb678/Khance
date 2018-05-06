@@ -1,4 +1,4 @@
-package xyz.mattyb.datafaker;
+package xyz.mattyb.khance;
 
 import org.junit.jupiter.api.Test;
 
@@ -7,17 +7,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static xyz.mattyb.datafaker.testutils.TestUtils.thousand;
+import static xyz.mattyb.khance.testutils.TestUtils.thousand;
 
-public class BoolPossibilityTest {
+public class BoolChanceTest {
 
     @Test
     public void testBool() {
-        final Possibility possibility = PossibilityFactory.possibility();
+        final Chance chance = ChanceFactory.chance();
         final AtomicInteger trueCount = new AtomicInteger(0);
 
         thousand(i -> {
-            if (possibility.bool()) {
+            if (chance.bool()) {
                 trueCount.incrementAndGet();
             }
         });
@@ -27,11 +27,11 @@ public class BoolPossibilityTest {
 
     @Test
     public void testBool_Likelihood() {
-        final Possibility possibility = PossibilityFactory.possibility();
+        final Chance chance = ChanceFactory.chance();
         final AtomicInteger trueCount = new AtomicInteger(0);
 
         thousand(i -> {
-            if (possibility.bool(30)) {
+            if (chance.bool(30)) {
                 trueCount.incrementAndGet();
             }
         });
@@ -41,7 +41,7 @@ public class BoolPossibilityTest {
         trueCount.set(0);
 
         thousand(i -> {
-            if (possibility.bool(99)) {
+            if (chance.bool(99)) {
                 trueCount.incrementAndGet();
             }
         });
@@ -51,10 +51,10 @@ public class BoolPossibilityTest {
 
     @Test
     public void testBool_LikelihoodOutOfRange() {
-        final Possibility possibility = PossibilityFactory.possibility();
+        final Chance chance = ChanceFactory.chance();
 
-        assertThrows(IllegalArgumentException.class, () -> possibility.bool(-6));
+        assertThrows(IllegalArgumentException.class, () -> chance.bool(-6));
 
-        assertThrows(IllegalArgumentException.class, () -> possibility.bool(19_000));
+        assertThrows(IllegalArgumentException.class, () -> chance.bool(19_000));
     }
 }

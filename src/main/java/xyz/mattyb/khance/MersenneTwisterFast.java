@@ -1,7 +1,6 @@
-package xyz.mattyb.datafaker;
+package xyz.mattyb.khance;
 
 import java.io.*;
-import java.util.*;
 
 /**
  * <h3>MersenneTwister and MersenneTwisterFast</h3>
