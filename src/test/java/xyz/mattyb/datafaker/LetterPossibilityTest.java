@@ -73,4 +73,44 @@ public class LetterPossibilityTest {
             assertThat(character, charMatchesPattern("[a-zA-Z]"));
         });
     }
+
+    @Test
+    public void testChar_Pool() {
+        final Possibility possibility = FakerFactory.possibility();
+
+        thousand(i -> {
+            final char character = possibility.character(Casing.LOWER, "abcdef");
+            assertThat(character, charMatchesPattern("[abcdef]"));
+        });
+    }
+
+    @Test
+    public void testChar_PoolNumbers() {
+        final Possibility possibility = FakerFactory.possibility();
+
+        thousand(i -> {
+            final char character = possibility.character(Casing.LOWER, "0123456789");
+            assertThat(character, charMatchesPattern("[0-9]"));
+        });
+    }
+
+    @Test
+    public void testHex() {
+        final Possibility possibility = FakerFactory.possibility();
+
+        thousand(i -> {
+            final char character = possibility.hex();
+            assertThat(character, charMatchesPattern("[0-9a-f]"));
+        });
+    }
+
+    @Test
+    public void testHex_Upper() {
+        final Possibility possibility = FakerFactory.possibility();
+
+        thousand(i -> {
+            final char character = possibility.hex(Casing.UPPER);
+            assertThat(character, charMatchesPattern("[0-9A-F]"));
+        });
+    }
 }

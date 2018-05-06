@@ -11,9 +11,7 @@ class Possibility(private val seed: Long = Random().nextLong()) {
 
     companion object {
         private const val alphabet: String = "abcdefghijklmnopqrstuvwxyz"
-        val LOWER_ALPHA_CHARS: CharArray = alphabet.toCharArray()
-        val UPPER_ALPHA_CHARS: CharArray = alphabet.toUpperCase().toCharArray()
-        val ALL_ALPHA_CHARS: CharArray = LOWER_ALPHA_CHARS + UPPER_ALPHA_CHARS;
+        private const val HEX_CHARS: String = "0123456789abcedf"
     }
 
     @JvmOverloads
@@ -35,13 +33,18 @@ class Possibility(private val seed: Long = Random().nextLong()) {
     }
 
     @JvmOverloads
-    fun character(casing: Casing = Casing.LOWER): Char {
+    fun character(casing: Casing = Casing.LOWER, pool:String = alphabet): Char {
         val charArray: CharArray = when (casing) {
-            Casing.LOWER -> LOWER_ALPHA_CHARS
-            Casing.UPPER -> UPPER_ALPHA_CHARS
-            else -> ALL_ALPHA_CHARS
+            Casing.LOWER -> pool.toLowerCase().toCharArray()
+            Casing.UPPER -> pool.toUpperCase().toCharArray()
+            else -> pool.toLowerCase().toCharArray() + pool.toUpperCase().toCharArray()
         }
         val randomIndex: Int = integer(0, charArray.size - 1)
         return charArray[randomIndex]
+    }
+
+    @JvmOverloads
+    fun hex(casing: Casing = Casing.LOWER): Char {
+        return character(casing, HEX_CHARS)
     }
 }
