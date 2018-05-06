@@ -10,7 +10,7 @@ class Possibility(private val seed: Long = Random().nextLong()) {
     private val random: MersenneTwisterFast = MersenneTwisterFast(seed)
 
     companion object {
-        private val alphabet: String = "abcdefghijklmnopqrstuvwxyz"
+        private const val alphabet: String = "abcdefghijklmnopqrstuvwxyz"
         val LOWER_ALPHA_CHARS: CharArray = alphabet.toCharArray()
         val UPPER_ALPHA_CHARS: CharArray = alphabet.toUpperCase().toCharArray()
         val ALL_ALPHA_CHARS: CharArray = LOWER_ALPHA_CHARS + UPPER_ALPHA_CHARS;
