@@ -31,12 +31,17 @@ class Possibility(private val seed: Long = Random().nextLong()) {
 
     @JvmOverloads
     fun letter(casing: Casing = Casing.LOWER): String {
+        return character(casing).toString()
+    }
+
+    @JvmOverloads
+    fun character(casing: Casing = Casing.LOWER): Char {
         val charArray: CharArray = when (casing) {
             Casing.LOWER -> LOWER_ALPHA_CHARS
             Casing.UPPER -> UPPER_ALPHA_CHARS
             else -> ALL_ALPHA_CHARS
         }
         val randomIndex: Int = integer(0, charArray.size - 1)
-        return charArray[randomIndex].toString()
+        return charArray[randomIndex]
     }
 }
