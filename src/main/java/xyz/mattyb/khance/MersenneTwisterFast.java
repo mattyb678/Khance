@@ -183,11 +183,8 @@ import java.io.*;
 // on the code, I strongly suggest looking at MersenneTwister.java first.
 // -- Sean
 
-public strictfp class MersenneTwisterFast implements Serializable
+public strictfp class MersenneTwisterFast
 {
-    // Serialization
-    private static final long serialVersionUID = -8219700664442619525L;  // locked as of Version 15
-
     // Period parameters
     private static final int N = 624;
     private static final int M = 397;
@@ -209,34 +206,6 @@ public strictfp class MersenneTwisterFast implements Serializable
 
     private double __nextNextGaussian;
     private boolean __haveNextNextGaussian;
-
-    /** Reads the entire state of the MersenneTwister RNG from the stream */
-    public void readState(DataInputStream stream) throws IOException
-    {
-        int len = mt.length;
-        for(int x=0;x<len;x++) mt[x] = stream.readInt();
-
-        len = mag01.length;
-        for(int x=0;x<len;x++) mag01[x] = stream.readInt();
-
-        mti = stream.readInt();
-        __nextNextGaussian = stream.readDouble();
-        __haveNextNextGaussian = stream.readBoolean();
-    }
-
-    /** Writes the entire state of the MersenneTwister RNG to the stream */
-    public void writeState(DataOutputStream stream) throws IOException
-    {
-        int len = mt.length;
-        for(int x=0;x<len;x++) stream.writeInt(mt[x]);
-
-        len = mag01.length;
-        for(int x=0;x<len;x++) stream.writeInt(mag01[x]);
-
-        stream.writeInt(mti);
-        stream.writeDouble(__nextNextGaussian);
-        stream.writeBoolean(__haveNextNextGaussian);
-    }
 
     /**
      * Constructor using a given seed.  Though you pass this seed in
