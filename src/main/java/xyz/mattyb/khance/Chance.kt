@@ -35,8 +35,8 @@ class Chance(private val seed: Long = Random().nextLong()) {
 
     fun naturalNumerals(numerals: Int): Int {
         CheckMate.check().`is`(numerals > 0).truthy().validate()
-        val min: Int = Math.pow(10.0, (numerals - 1).toDouble()).toInt()
-        val max: Int = Math.pow(10.0, numerals.toDouble()).toInt() - 1
+        val min: Int = 10.toThe(numerals - 1)
+        val max: Int = (10.toThe(numerals)) - 1
         return natural(min, max)
     }
 
@@ -76,5 +76,9 @@ class Chance(private val seed: Long = Random().nextLong()) {
     @JvmOverloads
     fun hex(casing: Casing = Casing.LOWER): Char {
         return character(casing, HEX_CHARS)
+    }
+
+    private fun Int.toThe(power: Int): Int {
+        return Math.pow(this.toDouble(), power.toDouble()).toInt()
     }
 }
