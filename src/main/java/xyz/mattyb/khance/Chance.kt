@@ -28,6 +28,19 @@ class Chance(private val seed: Long = Random().nextLong()) {
     }
 
     @JvmOverloads
+    fun natural(min: Int = 0, max: Int = Int.MAX_VALUE): Int {
+        CheckMate.check().intValue(min).between(0).and(max).inclusive().validate()
+        return integer(min, max)
+    }
+
+    fun naturalNumerals(numerals: Int): Int {
+        CheckMate.check().`is`(numerals > 0).truthy().validate()
+        val min: Int = 10 toThe (numerals - 1)
+        val max: Int = (10 toThe numerals) - 1
+        return natural(min, max)
+    }
+
+    @JvmOverloads
     fun letter(casing: Casing = Casing.LOWER): String {
         return character(casing).toString()
     }
@@ -46,5 +59,9 @@ class Chance(private val seed: Long = Random().nextLong()) {
     @JvmOverloads
     fun hex(casing: Casing = Casing.LOWER): Char {
         return character(casing, HEX_CHARS)
+    }
+
+    private infix fun Int.toThe(power: Int): Int {
+        return Math.pow(this.toDouble(), power.toDouble()).toInt()
     }
 }
