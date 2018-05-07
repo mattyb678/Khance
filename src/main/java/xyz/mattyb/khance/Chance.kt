@@ -44,6 +44,23 @@ class Chance(private val seed: Long = Random().nextLong()) {
     fun letter(casing: Casing = Casing.LOWER): String {
         return character(casing).toString()
     }
+    
+    fun string(): String {
+        return internalString()
+    }
+
+    fun string(length: Int): String {
+        return internalString(length = length)
+    }
+
+    fun string(casing: Casing): String {
+        return internalString(casing = casing)
+    }
+
+    private fun internalString(length: Int = natural(5, 20), casing: Casing = Casing.LOWER, pool:String = alphabet): String {
+        CheckMate.check().`is`(length >= 0).truthy().validate()
+        return (1..length).map { character(casing, pool) }.joinToString("")
+    }
 
     @JvmOverloads
     fun character(casing: Casing = Casing.LOWER, pool:String = alphabet): Char {

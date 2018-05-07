@@ -1,7 +1,7 @@
 package xyz.mattyb.khance;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import xyz.mattyb.khance.testutils.BaseChanceTest;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -10,14 +10,7 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static xyz.mattyb.khance.testutils.TestUtils.thousand;
 
-public class IntegerChanceTest {
-
-    private Chance chance;
-
-    @BeforeEach
-    public void setUp() {
-        chance = ChanceFactory.chance();
-    }
+public class IntegerChanceTest extends BaseChanceTest {
 
     @Test
     public void testInteger_ReturnsInteger() {

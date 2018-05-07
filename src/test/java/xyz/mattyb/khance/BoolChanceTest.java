@@ -1,6 +1,7 @@
 package xyz.mattyb.khance;
 
 import org.junit.jupiter.api.Test;
+import xyz.mattyb.khance.testutils.BaseChanceTest;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -9,11 +10,10 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static xyz.mattyb.khance.testutils.TestUtils.thousand;
 
-public class BoolChanceTest {
+public class BoolChanceTest  extends BaseChanceTest {
 
     @Test
     public void testBool() {
-        final Chance chance = ChanceFactory.chance();
         final AtomicInteger trueCount = new AtomicInteger(0);
 
         thousand(i -> {
@@ -27,7 +27,6 @@ public class BoolChanceTest {
 
     @Test
     public void testBool_Likelihood() {
-        final Chance chance = ChanceFactory.chance();
         final AtomicInteger trueCount = new AtomicInteger(0);
 
         thousand(i -> {
@@ -51,8 +50,6 @@ public class BoolChanceTest {
 
     @Test
     public void testBool_LikelihoodOutOfRange() {
-        final Chance chance = ChanceFactory.chance();
-
         assertThrows(IllegalArgumentException.class, () -> chance.bool(-6));
 
         assertThrows(IllegalArgumentException.class, () -> chance.bool(19_000));

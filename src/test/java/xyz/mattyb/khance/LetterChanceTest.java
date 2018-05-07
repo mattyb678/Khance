@@ -2,6 +2,7 @@ package xyz.mattyb.khance;
 
 import org.junit.jupiter.api.Test;
 import xyz.mattyb.khance.enums.Casing;
+import xyz.mattyb.khance.testutils.BaseChanceTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -9,12 +10,10 @@ import static xyz.mattyb.khance.testutils.CharacterMatchesPattern.charMatchesPat
 import static xyz.mattyb.khance.testutils.MatchesPattern.matchesPattern;
 import static xyz.mattyb.khance.testutils.TestUtils.thousand;
 
-public class LetterChanceTest {
+public class LetterChanceTest extends BaseChanceTest {
 
     @Test
     public void testLetter() {
-        final Chance chance = ChanceFactory.chance();
-
         thousand(i -> {
             final String letter = chance.letter();
             assertThat(letter.length(), is(1));
@@ -24,8 +23,6 @@ public class LetterChanceTest {
 
     @Test
     public void testChar() {
-        final Chance chance = ChanceFactory.chance();
-
         thousand(i -> {
             final char character = chance.character();
             assertThat(character, charMatchesPattern("[a-z]"));
@@ -34,8 +31,6 @@ public class LetterChanceTest {
 
     @Test
     public void testLetter_UpperCasing() {
-        final Chance chance = ChanceFactory.chance();
-
         thousand(i -> {
             final String letter = chance.letter(Casing.UPPER);
             assertThat(letter.length(), is(1));
@@ -45,8 +40,6 @@ public class LetterChanceTest {
 
     @Test
     public void testChar_UpperCasing() {
-        final Chance chance = ChanceFactory.chance();
-
         thousand(i -> {
             final char character = chance.character(Casing.UPPER);
             assertThat(character, charMatchesPattern("[A-Z]"));
@@ -55,8 +48,6 @@ public class LetterChanceTest {
 
     @Test
     public void testLetter_MixedCasing() {
-        final Chance chance = ChanceFactory.chance();
-
         thousand(i -> {
             final String letter = chance.letter(Casing.MIXED);
             assertThat(letter.length(), is(1));
@@ -66,8 +57,6 @@ public class LetterChanceTest {
 
     @Test
     public void testChar_MixedCasing() {
-        final Chance chance = ChanceFactory.chance();
-
         thousand(i -> {
             final char character = chance.character(Casing.MIXED);
             assertThat(character, charMatchesPattern("[a-zA-Z]"));
@@ -76,8 +65,6 @@ public class LetterChanceTest {
 
     @Test
     public void testChar_Pool() {
-        final Chance chance = ChanceFactory.chance();
-
         thousand(i -> {
             final char character = chance.character(Casing.LOWER, "abcdef");
             assertThat(character, charMatchesPattern("[abcdef]"));
@@ -86,8 +73,6 @@ public class LetterChanceTest {
 
     @Test
     public void testChar_PoolNumbers() {
-        final Chance chance = ChanceFactory.chance();
-
         thousand(i -> {
             final char character = chance.character(Casing.LOWER, "0123456789");
             assertThat(character, charMatchesPattern("[0-9]"));
@@ -96,8 +81,6 @@ public class LetterChanceTest {
 
     @Test
     public void testHex() {
-        final Chance chance = ChanceFactory.chance();
-
         thousand(i -> {
             final char character = chance.hex();
             assertThat(character, charMatchesPattern("[0-9a-f]"));
@@ -106,8 +89,6 @@ public class LetterChanceTest {
 
     @Test
     public void testHex_Upper() {
-        final Chance chance = ChanceFactory.chance();
-
         thousand(i -> {
             final char character = chance.hex(Casing.UPPER);
             assertThat(character, charMatchesPattern("[0-9A-F]"));
