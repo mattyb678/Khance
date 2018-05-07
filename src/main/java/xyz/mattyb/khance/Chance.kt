@@ -35,8 +35,8 @@ class Chance(private val seed: Long = Random().nextLong()) {
 
     fun naturalNumerals(numerals: Int): Int {
         CheckMate.check().`is`(numerals > 0).truthy().validate()
-        val min: Int = 10 toThe (numerals - 1)
-        val max: Int = (10 toThe numerals) - 1
+        val min: Int = 10.toThe(numerals - 1)
+        val max: Int = (10.toThe(numerals)) - 1
         return natural(min, max)
     }
 
@@ -44,7 +44,7 @@ class Chance(private val seed: Long = Random().nextLong()) {
     fun letter(casing: Casing = Casing.LOWER): String {
         return character(casing).toString()
     }
-    
+
     fun string(): String {
         return internalString()
     }
@@ -78,7 +78,7 @@ class Chance(private val seed: Long = Random().nextLong()) {
         return character(casing, HEX_CHARS)
     }
 
-    private infix fun Int.toThe(power: Int): Int {
+    private fun Int.toThe(power: Int): Int {
         return Math.pow(this.toDouble(), power.toDouble()).toInt()
     }
 }
