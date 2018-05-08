@@ -1,6 +1,7 @@
 package xyz.mattyb.khance
 
 import xyz.mattyb.checkmate.CheckMate
+import xyz.mattyb.khance.enums.AgeType
 import xyz.mattyb.khance.enums.Casing
 import java.util.*
 import kotlin.math.floor
@@ -80,5 +81,19 @@ class Chance(private val seed: Long = Random().nextLong()) {
 
     private fun Int.toThe(power: Int): Int {
         return Math.pow(this.toDouble(), power.toDouble()).toInt()
+    }
+
+    /******************** Person ********************/
+
+    @JvmOverloads
+    fun age(ageType: AgeType? = null): Int {
+        return when (ageType) {
+            AgeType.BABY -> natural(0, 2)
+            AgeType.CHILD -> natural(0, 12)
+            AgeType.TEEN -> natural(13, 19)
+            AgeType.ADULT -> natural(18, 65)
+            AgeType.SENIOR -> natural(65, 100)
+            else -> natural(0, 100)
+        }
     }
 }
