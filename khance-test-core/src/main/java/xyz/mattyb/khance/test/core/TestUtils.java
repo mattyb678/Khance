@@ -1,4 +1,4 @@
-package xyz.mattyb.khance.testutils;
+package xyz.mattyb.khance.test.core;
 
 import java.util.function.Consumer;
 import java.util.stream.IntStream;

@@ -11,6 +11,7 @@
     <modules>
         <module>khance-core</module>
         <module>khance-junit5</module>
+        <module>khance-test-core</module>
     </modules>
 
     <properties>
@@ -26,6 +27,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-stdlib-jdk8</artifactId>
+                <version>${kotlin.version}</version>
+            </dependency>
             <dependency>
                 <groupId>xyz.mattyb</groupId>
                 <artifactId>checkmate-core</artifactId>
@@ -48,7 +54,6 @@
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-all</artifactId>
                 <version>${hamcrest.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>

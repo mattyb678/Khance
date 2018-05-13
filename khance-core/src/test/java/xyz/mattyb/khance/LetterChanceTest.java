@@ -6,9 +6,9 @@ import xyz.mattyb.khance.testutils.BaseChanceTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static xyz.mattyb.khance.testutils.CharacterMatchesPattern.charMatchesPattern;
-import static xyz.mattyb.khance.testutils.MatchesPattern.matchesPattern;
-import static xyz.mattyb.khance.testutils.TestUtils.thousand;
+import static xyz.mattyb.khance.test.core.CharacterMatchesPattern.charMatchesPattern;
+import static xyz.mattyb.khance.test.core.MatchesPattern.matchesPattern;
+import static xyz.mattyb.khance.test.core.TestUtils.thousand;
 
 public class LetterChanceTest extends BaseChanceTest {
 

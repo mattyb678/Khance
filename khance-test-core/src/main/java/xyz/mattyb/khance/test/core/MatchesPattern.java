@@ -1,4 +1,4 @@
-package xyz.mattyb.khance.testutils;
+package xyz.mattyb.khance.test.core;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
