@@ -1,29 +1,34 @@
 package xyz.mattyb.khance.test.junit5;
 
 import org.junit.jupiter.api.extension.*;
+import org.junit.platform.commons.support.AnnotationSupport;
 import xyz.mattyb.khance.Chance;
 import xyz.mattyb.khance.ChanceFactory;
 import xyz.mattyb.khance.test.core.annotations.BoolProvider;
 import xyz.mattyb.khance.test.core.annotations.ChanceProvider;
 import xyz.mattyb.khance.test.core.annotations.IntegerProvider;
+import xyz.mattyb.khance.test.core.annotations.NaturalProvider;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 import java.lang.reflect.Parameter;
 
-import static org.junit.platform.commons.support.AnnotationSupport.isAnnotated;
-
 public class ChanceProviderExtension implements ParameterResolver, TestInstancePostProcessor {
     @Override
-    public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
-        Parameter param = parameterContext.getParameter();
-        return isAnnotated(param, BoolProvider.class) || isAnnotated(param, IntegerProvider.class);
+    public boolean supportsParameter(ParameterContext paramCtx, ExtensionContext extCtx) throws ParameterResolutionException {
+        Parameter param = paramCtx.getParameter();
+        return isAnnotated(param, BoolProvider.class, IntegerProvider.class, ChanceProvider.class, NaturalProvider.class);
     }
 
     @Override
-    public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
-        Chance chance = getChance(extensionContext);
+    public Object resolveParameter(ParameterContext paramCtx, ExtensionContext extCtx) throws ParameterResolutionException {
+        Chance chance = getChance(extCtx);
 
-        Parameter param = parameterContext.getParameter();
+        Parameter param = paramCtx.getParameter();
+        if (isAnnotated(param, ChanceProvider.class) && assignable(param, Chance.class)) {
+            return chance;
+        }
         if (isAnnotated(param, BoolProvider.class) && assignable(param, Boolean.class, boolean.class)) {
             return chance.bool(param.getAnnotation(BoolProvider.class).likelihood());
         }
@@ -31,19 +36,38 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
             IntegerProvider provider = param.getAnnotation(IntegerProvider.class);
             return chance.integer(provider.min(), provider.max());
         }
+        if (isAnnotated(param, NaturalProvider.class) && assignable(param, Integer.class, int.class)) {
+            NaturalProvider provider = param.getAnnotation(NaturalProvider.class);
+            if (provider.numerals() > 0) {
+                return chance.naturalNumerals(provider.numerals());
+            } else {
+                return chance.natural(provider.min(), provider.max());
+            }
+        }
+
         return null;
     }
 
     @Override
-    public void postProcessTestInstance(Object o, ExtensionContext extensionContext) throws Exception {
-        Chance chance = getChance(extensionContext);
+    public void postProcessTestInstance(Object o, ExtensionContext extCtx) throws Exception {
+        Chance chance = getChance(extCtx);
 
-        for (Field field : extensionContext.getRequiredTestClass().getDeclaredFields()) {
+        for (Field field : extCtx.getRequiredTestClass().getDeclaredFields()) {
             if (isAnnotated(field, ChanceProvider.class)) {
                 field.setAccessible(true);
                 field.set(o, chance);
             }
         }
+    }
+
+    @SafeVarargs
+    private final boolean isAnnotated(AnnotatedElement element, Class<? extends Annotation>... checks) {
+        for (Class<? extends Annotation> toCheck : checks) {
+            if (AnnotationSupport.isAnnotated(element, toCheck)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean assignable(Parameter param, Class<?>... checks) {
