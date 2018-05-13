@@ -17,6 +17,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>xyz.mattyb</groupId>
+            <artifactId>khance-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
         </dependency>

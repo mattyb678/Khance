@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static xyz.mattyb.khance.test.core.TestUtils.thousand;
+import static xyz.mattyb.khance.test.utils.TestUtils.thousand;
 
 public class BoolChanceTest  extends BaseChanceTest {
 

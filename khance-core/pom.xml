@@ -20,13 +20,13 @@
             <groupId>xyz.mattyb</groupId>
             <artifactId>checkmate-core</artifactId>
         </dependency>
-
         <dependency>
             <groupId>xyz.mattyb</groupId>
-            <artifactId>khance-test-core</artifactId>
+            <artifactId>khance-test-utils</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
+
         <!-- To avoid compiler warnings about @API annotations in JUnit code -->
         <dependency>
             <groupId>org.apiguardian</groupId>

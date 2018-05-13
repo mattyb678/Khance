@@ -6,7 +6,7 @@ import xyz.mattyb.khance.testutils.BaseChanceTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static xyz.mattyb.khance.test.core.TestUtils.thousand;
+import static xyz.mattyb.khance.test.utils.TestUtils.thousand;
 
 public class PersonChanceTest extends BaseChanceTest {
 
