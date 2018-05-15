@@ -4,16 +4,15 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import xyz.mattyb.khance.Chance;
-import xyz.mattyb.khance.test.core.annotations.BoolProvider;
-import xyz.mattyb.khance.test.core.annotations.ChanceProvider;
-import xyz.mattyb.khance.test.core.annotations.IntegerProvider;
-import xyz.mattyb.khance.test.core.annotations.NaturalProvider;
+import xyz.mattyb.khance.enums.Casing;
+import xyz.mattyb.khance.test.core.annotations.*;
 import xyz.mattyb.khance.test.junit5.ChanceProviderExtension;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static xyz.mattyb.khance.test.utils.MatchesPattern.matchesPattern;
 import static xyz.mattyb.khance.test.utils.TestUtils.thousand;
 
 @ExtendWith(ChanceProviderExtension.class)
@@ -70,6 +69,26 @@ public class TestChanceProviders {
     @Test
     public void testNatural(@NaturalProvider(min = 10, max = 20) String val) {
         assertThat(val, is(nullValue()));
+    }
+
+    @RepeatedTest(10)
+    public void testString_Casing(@StringProvider String str) {
+        assertThat(str, matchesPattern("[a-z]+"));
+    }
+
+    @RepeatedTest(10)
+    public void testString_UpperCasing(@StringProvider(casing = Casing.UPPER) String str) {
+        assertThat(str, matchesPattern("[A-Z]+"));
+    }
+
+    @RepeatedTest(10)
+    public void testString_MixedCasing(@StringProvider(casing = Casing.MIXED) String str) {
+        assertThat(str, matchesPattern("[a-zA-Z]+"));
+    }
+
+    @RepeatedTest(10)
+    public void testString_Length(@StringProvider(length = 22) String str) {
+        assertThat(str.length(), is(22));
     }
 
     @Test

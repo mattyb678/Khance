@@ -58,6 +58,10 @@ class Chance(private val seed: Long = Random().nextLong()) {
         return internalString(casing = casing)
     }
 
+    fun string(length: Int, casing: Casing): String {
+        return internalString(length = length, casing = casing)
+    }
+
     private fun internalString(length: Int = natural(5, 20), casing: Casing = Casing.LOWER, pool:String = alphabet): String {
         CheckMate.check().`is`(length >= 0).truthy().validate()
         return (1..length).map { character(casing, pool) }.joinToString("")

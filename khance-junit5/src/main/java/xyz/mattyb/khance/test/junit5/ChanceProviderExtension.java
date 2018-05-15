@@ -4,10 +4,7 @@ import org.junit.jupiter.api.extension.*;
 import org.junit.platform.commons.support.AnnotationSupport;
 import xyz.mattyb.khance.Chance;
 import xyz.mattyb.khance.ChanceFactory;
-import xyz.mattyb.khance.test.core.annotations.BoolProvider;
-import xyz.mattyb.khance.test.core.annotations.ChanceProvider;
-import xyz.mattyb.khance.test.core.annotations.IntegerProvider;
-import xyz.mattyb.khance.test.core.annotations.NaturalProvider;
+import xyz.mattyb.khance.test.core.annotations.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
@@ -18,7 +15,8 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
     @Override
     public boolean supportsParameter(ParameterContext paramCtx, ExtensionContext extCtx) throws ParameterResolutionException {
         Parameter param = paramCtx.getParameter();
-        return isAnnotated(param, BoolProvider.class, IntegerProvider.class, ChanceProvider.class, NaturalProvider.class);
+        return isAnnotated(param, BoolProvider.class, IntegerProvider.class, ChanceProvider.class, NaturalProvider.class,
+                StringProvider.class);
     }
 
     @Override
@@ -28,6 +26,13 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
         Parameter param = paramCtx.getParameter();
         if (isAnnotated(param, ChanceProvider.class) && assignable(param, Chance.class)) {
             return chance;
+        }
+        if (isAnnotated(param, StringProvider.class) && assignable(param, String.class, CharSequence.class)) {
+            StringProvider strProvider = param.getAnnotation(StringProvider.class);
+            if (strProvider.length() < 0) {
+                return chance.string(strProvider.casing());
+            }
+            return chance.string(strProvider.length(), strProvider.casing());
         }
         if (isAnnotated(param, BoolProvider.class) && assignable(param, Boolean.class, boolean.class)) {
             return chance.bool(param.getAnnotation(BoolProvider.class).likelihood());
