@@ -13,6 +13,7 @@
         <module>khance-junit5</module>
         <module>khance-test-core</module>
         <module>khance-test-utils</module>
+        <module>khance-dict</module>
     </modules>
 
     <properties>
