@@ -26,4 +26,14 @@ public class TestChanceRule {
 
         assertThat(trueCount.get(), is(allOf(greaterThan(200), lessThan(800))));
     }
+
+    @Test
+    public void testPopulate() {
+        thousand(i -> {
+            TestPopulatedClass populated = (TestPopulatedClass) chanceRule.populate(TestPopulator.class);
+
+            assertThat(populated.getAge(), is(allOf(greaterThan(-1), lessThan(101))));
+            assertThat(populated.getYo().length(), is(15));
+        });
+    }
 }
