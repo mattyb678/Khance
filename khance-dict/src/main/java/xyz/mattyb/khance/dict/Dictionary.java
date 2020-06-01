@@ -46,9 +46,9 @@ public class Dictionary {
     }
 
     public static String getWord(String locale, int length) throws IOException {
-        Path path = Paths.get(format("%s/%s/%s", RESOURCE_DIR, DEFAULT_LOCALE, length));
+        Path path = Paths.get(format("%s/%s/%s", RESOURCE_DIR, locale, length));
         SeekableByteChannel channel = Files.newByteChannel(path, StandardOpenOption.READ);
-        long lineCount = WORD_SIZE.get(DEFAULT_LOCALE).get(length);
+        long lineCount = WORD_SIZE.get(locale).get(length);
         long randomLine = new Random().nextInt(Integer.MAX_VALUE) % lineCount;
         ByteBuffer buffer = ByteBuffer.allocate(length);
         channel.position(length * randomLine + randomLine).read(buffer);
