@@ -2,6 +2,7 @@ package xyz.mattyb.khance;
 
 import org.junit.jupiter.api.Test;
 import xyz.mattyb.khance.enums.AgeType;
+import xyz.mattyb.khance.enums.Nationality;
 import xyz.mattyb.khance.testutils.BaseChanceTest;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -14,44 +15,44 @@ public class PersonChanceTest extends BaseChanceTest {
 
     @Test
     public void testAge() {
-        thousand(i -> assertThat(chance.age(), is(allOf(greaterThanOrEqualTo(0), lessThan(101)))));
+        thousand(i -> assertThat(chance.person().age(), is(allOf(greaterThanOrEqualTo(0), lessThan(101)))));
     }
 
     @Test
     public void testAge_Baby() {
-        thousand(i -> assertThat(chance.age(AgeType.BABY), is(allOf(greaterThanOrEqualTo(0), lessThan(3)))));
+        thousand(i -> assertThat(chance.person().age(AgeType.BABY), is(allOf(greaterThanOrEqualTo(0), lessThan(3)))));
     }
 
     @Test
     public void testAge_Child() {
-        thousand(i -> assertThat(chance.age(AgeType.CHILD), is(allOf(greaterThanOrEqualTo(0), lessThan(13)))));
+        thousand(i -> assertThat(chance.person().age(AgeType.CHILD), is(allOf(greaterThanOrEqualTo(0), lessThan(13)))));
     }
 
     @Test
     public void testAge_Teen() {
-        thousand(i -> assertThat(chance.age(AgeType.TEEN), is(allOf(greaterThan(12), lessThan(20)))));
+        thousand(i -> assertThat(chance.person().age(AgeType.TEEN), is(allOf(greaterThan(12), lessThan(20)))));
     }
 
     @Test
     public void testAge_Adult() {
-        thousand(i -> assertThat(chance.age(AgeType.ADULT), is(allOf(greaterThan(17), lessThan(66)))));
+        thousand(i -> assertThat(chance.person().age(AgeType.ADULT), is(allOf(greaterThan(17), lessThan(66)))));
     }
 
     @Test
     public void testAge_Senior() {
-        thousand(i -> assertThat(chance.age(AgeType.SENIOR), is(allOf(greaterThan(64), lessThan(101)))));
+        thousand(i -> assertThat(chance.person().age(AgeType.SENIOR), is(allOf(greaterThan(64), lessThan(101)))));
     }
 
     @Test
     public void testAge_All() {
-        thousand(i -> assertThat(chance.age(AgeType.ALL), is(allOf(greaterThanOrEqualTo(0), lessThan(101)))));
+        thousand(i -> assertThat(chance.person().age(AgeType.ALL), is(allOf(greaterThanOrEqualTo(0), lessThan(101)))));
     }
 
     @Test
     public void testGender() {
         final AtomicInteger femaleCount = new AtomicInteger(0);
         thousand(i -> {
-            if (chance.gender().equalsIgnoreCase("female")) {
+            if (chance.person().gender().equalsIgnoreCase("female")) {
                 femaleCount.incrementAndGet();
             }
         });
@@ -62,11 +63,56 @@ public class PersonChanceTest extends BaseChanceTest {
     public void testGender_Extra() {
         final AtomicInteger femaleCount = new AtomicInteger(0);
         thousand(i -> {
-            String gender = chance.gender("Genderqueer", "Trans", "Pangender", "Agender");
+            String gender = chance.person().gender("Genderqueer", "Trans", "Pangender", "Agender");
             if (gender.equalsIgnoreCase("female")) {
                 femaleCount.incrementAndGet();
             }
         });
         assertThat(femaleCount.get(), is(allOf(greaterThan(100), lessThan(500))));
+    }
+
+    @Test
+    public void testLastName() {
+        thousand(i -> {
+            String lastName = chance.person().lastName();
+            assertThat(lastName, not(isEmptyString()));
+        });
+    }
+
+    @Test
+    public void testLastName_Specific() {
+        thousand(i -> {
+            String usaName = chance.person().lastName(Nationality.USA);
+            assertThat(usaName, not(isEmptyOrNullString()));
+            assertThat(NamesKt.USA_NAMES, hasItem(usaName));
+
+            String italyName = chance.person().lastName(Nationality.ITALY);
+            assertThat(italyName, not(isEmptyOrNullString()));
+            assertThat(NamesKt.ITALY_NAMES, hasItem(italyName));
+
+            String netherlandsName = chance.person().lastName(Nationality.NETHERLANDS);
+            assertThat(netherlandsName, not(isEmptyOrNullString()));
+            assertThat(NamesKt.NETHERLANDS_NAMES, hasItem(netherlandsName));
+
+            String ukName = chance.person().lastName(Nationality.UK);
+            assertThat(ukName, not(isEmptyOrNullString()));
+            assertThat(NamesKt.UK_NAMES, hasItem(ukName));
+
+            String germanName = chance.person().lastName(Nationality.GERMANY);
+            assertThat(germanName, not(isEmptyOrNullString()));
+            assertThat(NamesKt.GERMANY_NAMES, hasItem(germanName));
+
+            String japanName = chance.person().lastName(Nationality.JAPAN);
+            assertThat(japanName, not(isEmptyOrNullString()));
+            assertThat(NamesKt.JAPAN_NAMES, hasItem(japanName));
+
+            String spainName = chance.person().lastName(Nationality.SPAIN);
+            assertThat(spainName, not(isEmptyOrNullString()));
+            assertThat(NamesKt.SPAIN_NAMES, hasItem(spainName));
+
+            String franceName = chance.person().lastName(Nationality.FRANCE);
+            assertThat(franceName, not(isEmptyOrNullString()));
+            assertThat(NamesKt.FRANCE_NAMES, hasItem(franceName));
+        });
     }
 }

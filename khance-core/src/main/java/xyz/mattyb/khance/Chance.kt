@@ -3,6 +3,7 @@ package xyz.mattyb.khance
 import xyz.mattyb.checkmate.CheckMate
 import xyz.mattyb.khance.enums.AgeType
 import xyz.mattyb.khance.enums.Casing
+import xyz.mattyb.khance.enums.Nationality
 import java.util.*
 import kotlin.math.floor
 
@@ -13,7 +14,6 @@ class Chance(private val seed: Long = Random().nextLong()) {
     companion object {
         private const val alphabet: String = "abcdefghijklmnopqrstuvwxyz"
         private const val HEX_CHARS: String = "0123456789abcedf"
-        private val genders = listOf("Male", "Female")
     }
 
     @JvmOverloads
@@ -90,20 +90,49 @@ class Chance(private val seed: Long = Random().nextLong()) {
 
     /******************** Person ********************/
 
-    @JvmOverloads
-    fun age(ageType: AgeType? = null): Int {
-        return when (ageType) {
-            AgeType.BABY -> natural(0, 2)
-            AgeType.CHILD -> natural(0, 12)
-            AgeType.TEEN -> natural(13, 19)
-            AgeType.ADULT -> natural(18, 65)
-            AgeType.SENIOR -> natural(65, 100)
-            else -> natural(0, 100)
-        }
-    }
+    private val person = Person(this)
 
-    fun gender(vararg extraGenders: String): String {
-        val allGenders = listOf(*extraGenders).plus(genders)
-        return allGenders[integer(0, allGenders.size - 1)]
+    fun person() = person
+
+    class Person(private val chance: Chance) {
+
+        private val genders = listOf("Male", "Female")
+
+        private val lastNameMap = mapOf(
+                Nationality.USA to USA_NAMES,
+                Nationality.ITALY to ITALY_NAMES,
+                Nationality.NETHERLANDS to NETHERLANDS_NAMES,
+                Nationality.UK to UK_NAMES,
+                Nationality.GERMANY to GERMANY_NAMES,
+                Nationality.JAPAN to JAPAN_NAMES,
+                Nationality.SPAIN to SPAIN_NAMES,
+                Nationality.FRANCE to FRANCE_NAMES
+        )
+
+        @JvmOverloads
+        fun age(ageType: AgeType? = null): Int {
+            return when (ageType) {
+                AgeType.BABY -> chance.natural(0, 2)
+                AgeType.CHILD -> chance.natural(0, 12)
+                AgeType.TEEN -> chance.natural(13, 19)
+                AgeType.ADULT -> chance.natural(18, 65)
+                AgeType.SENIOR -> chance.natural(65, 100)
+                else -> chance.natural(0, 100)
+            }
+        }
+
+        fun gender(vararg extraGenders: String): String {
+            return listOf(*extraGenders)
+                    .plus(genders)
+                    .random()
+        }
+
+        fun lastName(vararg nationality: Nationality): String {
+            return if (nationality.isEmpty()) {
+                lastNameMap[lastNameMap.keys.random()]?.random() ?: ""
+            } else {
+                lastNameMap[nationality.random()]?.random() ?: ""
+            }
+        }
     }
 }
