@@ -74,7 +74,7 @@ public class PersonChanceTest extends BaseChanceTest {
     @Test
     public void testLastName() {
         thousand(i -> {
-            String lastName = chance.person().lastName();
+            String lastName = chance.person().last();
             assertThat(lastName, not(isEmptyString()));
         });
     }
@@ -82,35 +82,35 @@ public class PersonChanceTest extends BaseChanceTest {
     @Test
     public void testLastName_Specific() {
         thousand(i -> {
-            String usaName = chance.person().lastName(Nationality.USA);
+            String usaName = chance.person().last(Nationality.USA);
             assertThat(usaName, not(isEmptyOrNullString()));
             assertThat(NamesKt.USA_NAMES, hasItem(usaName));
 
-            String italyName = chance.person().lastName(Nationality.ITALY);
+            String italyName = chance.person().last(Nationality.ITALY);
             assertThat(italyName, not(isEmptyOrNullString()));
             assertThat(NamesKt.ITALY_NAMES, hasItem(italyName));
 
-            String netherlandsName = chance.person().lastName(Nationality.NETHERLANDS);
+            String netherlandsName = chance.person().last(Nationality.NETHERLANDS);
             assertThat(netherlandsName, not(isEmptyOrNullString()));
             assertThat(NamesKt.NETHERLANDS_NAMES, hasItem(netherlandsName));
 
-            String ukName = chance.person().lastName(Nationality.UK);
+            String ukName = chance.person().last(Nationality.UK);
             assertThat(ukName, not(isEmptyOrNullString()));
             assertThat(NamesKt.UK_NAMES, hasItem(ukName));
 
-            String germanName = chance.person().lastName(Nationality.GERMANY);
+            String germanName = chance.person().last(Nationality.GERMANY);
             assertThat(germanName, not(isEmptyOrNullString()));
             assertThat(NamesKt.GERMANY_NAMES, hasItem(germanName));
 
-            String japanName = chance.person().lastName(Nationality.JAPAN);
+            String japanName = chance.person().last(Nationality.JAPAN);
             assertThat(japanName, not(isEmptyOrNullString()));
             assertThat(NamesKt.JAPAN_NAMES, hasItem(japanName));
 
-            String spainName = chance.person().lastName(Nationality.SPAIN);
+            String spainName = chance.person().last(Nationality.SPAIN);
             assertThat(spainName, not(isEmptyOrNullString()));
             assertThat(NamesKt.SPAIN_NAMES, hasItem(spainName));
 
-            String franceName = chance.person().lastName(Nationality.FRANCE);
+            String franceName = chance.person().last(Nationality.FRANCE);
             assertThat(franceName, not(isEmptyOrNullString()));
             assertThat(NamesKt.FRANCE_NAMES, hasItem(franceName));
         });

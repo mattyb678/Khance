@@ -127,7 +127,7 @@ class Chance(private val seed: Long = Random().nextLong()) {
                     .random()
         }
 
-        fun lastName(vararg nationality: Nationality): String {
+        fun last(vararg nationality: Nationality): String {
             return if (nationality.isEmpty()) {
                 lastNameMap[lastNameMap.keys.random()]?.random() ?: ""
             } else {
