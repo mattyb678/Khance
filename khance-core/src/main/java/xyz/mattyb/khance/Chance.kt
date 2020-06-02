@@ -3,6 +3,7 @@ package xyz.mattyb.khance
 import xyz.mattyb.checkmate.CheckMate
 import xyz.mattyb.khance.enums.AgeType
 import xyz.mattyb.khance.enums.Casing
+import xyz.mattyb.khance.enums.Gender
 import xyz.mattyb.khance.enums.Nationality
 import java.util.*
 import kotlin.math.floor
@@ -98,15 +99,26 @@ class Chance(private val seed: Long = Random().nextLong()) {
 
         private val genders = listOf("Male", "Female")
 
+        private val firstNameMap = mapOf(
+                Nationality.USA to mapOf(
+                        Gender.MALE to ENG_MALE_FIRST_NAMES,
+                        Gender.FEMALE to ENG_FEMALE_FIRST_NAMES
+                ),
+                Nationality.UK to mapOf(
+                        Gender.MALE to ENG_MALE_FIRST_NAMES,
+                        Gender.FEMALE to ENG_FEMALE_FIRST_NAMES
+                )
+        )
+
         private val lastNameMap = mapOf(
-                Nationality.USA to USA_NAMES,
-                Nationality.ITALY to ITALY_NAMES,
-                Nationality.NETHERLANDS to NETHERLANDS_NAMES,
-                Nationality.UK to UK_NAMES,
-                Nationality.GERMANY to GERMANY_NAMES,
-                Nationality.JAPAN to JAPAN_NAMES,
-                Nationality.SPAIN to SPAIN_NAMES,
-                Nationality.FRANCE to FRANCE_NAMES
+                Nationality.USA to USA_LAST_NAMES,
+                Nationality.ITALY to ITALY_LAST_NAMES,
+                Nationality.NETHERLANDS to NETHERLANDS_LAST_NAMES,
+                Nationality.UK to UK_LAST_NAMES,
+                Nationality.GERMANY to GERMANY_LAST_NAMES,
+                Nationality.JAPAN to JAPAN_LAST_NAMES,
+                Nationality.SPAIN to SPAIN_LAST_NAMES,
+                Nationality.FRANCE to FRANCE_LAST_NAMES
         )
 
         @JvmOverloads
@@ -125,6 +137,15 @@ class Chance(private val seed: Long = Random().nextLong()) {
             return listOf(*extraGenders)
                     .plus(genders)
                     .random()
+        }
+
+        fun first(vararg nationality: Nationality): String {
+            val gender = Gender.values().random()
+            return if (nationality.isEmpty()) {
+                firstNameMap[firstNameMap.keys.random()]?.get(gender)?.random() ?: ""
+            } else {
+                firstNameMap[nationality.random()]?.get(gender)?.random() ?: ""
+            }
         }
 
         fun last(vararg nationality: Nationality): String {

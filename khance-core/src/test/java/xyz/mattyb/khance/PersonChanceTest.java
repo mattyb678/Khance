@@ -5,6 +5,8 @@ import xyz.mattyb.khance.enums.AgeType;
 import xyz.mattyb.khance.enums.Nationality;
 import xyz.mattyb.khance.testutils.BaseChanceTest;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -84,35 +86,47 @@ public class PersonChanceTest extends BaseChanceTest {
         thousand(i -> {
             String usaName = chance.person().last(Nationality.USA);
             assertThat(usaName, not(isEmptyOrNullString()));
-            assertThat(NamesKt.USA_NAMES, hasItem(usaName));
+            assertThat(LastNamesKt.USA_LAST_NAMES, hasItem(usaName));
 
             String italyName = chance.person().last(Nationality.ITALY);
             assertThat(italyName, not(isEmptyOrNullString()));
-            assertThat(NamesKt.ITALY_NAMES, hasItem(italyName));
+            assertThat(LastNamesKt.ITALY_LAST_NAMES, hasItem(italyName));
 
             String netherlandsName = chance.person().last(Nationality.NETHERLANDS);
             assertThat(netherlandsName, not(isEmptyOrNullString()));
-            assertThat(NamesKt.NETHERLANDS_NAMES, hasItem(netherlandsName));
+            assertThat(LastNamesKt.NETHERLANDS_LAST_NAMES, hasItem(netherlandsName));
 
             String ukName = chance.person().last(Nationality.UK);
             assertThat(ukName, not(isEmptyOrNullString()));
-            assertThat(NamesKt.UK_NAMES, hasItem(ukName));
+            assertThat(LastNamesKt.UK_LAST_NAMES, hasItem(ukName));
 
             String germanName = chance.person().last(Nationality.GERMANY);
             assertThat(germanName, not(isEmptyOrNullString()));
-            assertThat(NamesKt.GERMANY_NAMES, hasItem(germanName));
+            assertThat(LastNamesKt.GERMANY_LAST_NAMES, hasItem(germanName));
 
             String japanName = chance.person().last(Nationality.JAPAN);
             assertThat(japanName, not(isEmptyOrNullString()));
-            assertThat(NamesKt.JAPAN_NAMES, hasItem(japanName));
+            assertThat(LastNamesKt.JAPAN_LAST_NAMES, hasItem(japanName));
 
             String spainName = chance.person().last(Nationality.SPAIN);
             assertThat(spainName, not(isEmptyOrNullString()));
-            assertThat(NamesKt.SPAIN_NAMES, hasItem(spainName));
+            assertThat(LastNamesKt.SPAIN_LAST_NAMES, hasItem(spainName));
 
             String franceName = chance.person().last(Nationality.FRANCE);
             assertThat(franceName, not(isEmptyOrNullString()));
-            assertThat(NamesKt.FRANCE_NAMES, hasItem(franceName));
+            assertThat(LastNamesKt.FRANCE_LAST_NAMES, hasItem(franceName));
+        });
+    }
+
+    @Test
+    public void testFirstName() {
+        List<String> combined = new ArrayList<>();
+        combined.addAll(FirstNamesKt.ENG_MALE_FIRST_NAMES);
+        combined.addAll(FirstNamesKt.ENG_FEMALE_FIRST_NAMES);
+        thousand(i -> {
+            String name = chance.person().first();
+            assertThat(name, not(isEmptyOrNullString()));
+            assertThat(combined, hasItem(name));
         });
     }
 }

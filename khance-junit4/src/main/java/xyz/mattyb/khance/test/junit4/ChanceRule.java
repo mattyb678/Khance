@@ -3,7 +3,6 @@ package xyz.mattyb.khance.test.junit4;
 import org.junit.rules.TestWatcher;
 import xyz.mattyb.khance.Chance;
 import xyz.mattyb.khance.ChanceFactory;
-import xyz.mattyb.khance.NamesKt;
 import xyz.mattyb.khance.test.core.ChancePopulator;
 import xyz.mattyb.khance.test.core.Populator;
 
