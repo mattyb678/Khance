@@ -13,6 +13,7 @@ class Chance(private val seed: Long = Random().nextLong()) {
     companion object {
         private const val alphabet: String = "abcdefghijklmnopqrstuvwxyz"
         private const val HEX_CHARS: String = "0123456789abcedf"
+        private val genders = listOf("Male", "Female")
     }
 
     @JvmOverloads
@@ -99,5 +100,10 @@ class Chance(private val seed: Long = Random().nextLong()) {
             AgeType.SENIOR -> natural(65, 100)
             else -> natural(0, 100)
         }
+    }
+
+    fun gender(vararg extraGenders: String): String {
+        val allGenders = listOf(*extraGenders).plus(genders)
+        return allGenders[integer(0, allGenders.size - 1)]
     }
 }
