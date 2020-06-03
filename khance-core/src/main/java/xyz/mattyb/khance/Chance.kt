@@ -1,10 +1,8 @@
 package xyz.mattyb.khance
 
 import xyz.mattyb.checkmate.CheckMate
-import xyz.mattyb.khance.enums.AgeType
-import xyz.mattyb.khance.enums.Casing
-import xyz.mattyb.khance.enums.Gender
-import xyz.mattyb.khance.enums.Nationality
+import xyz.mattyb.khance.enums.*
+import xyz.mattyb.khance.enums.professions
 import java.util.*
 import kotlin.math.floor
 
@@ -182,6 +180,18 @@ class Chance(private val seed: Long = Random().nextLong()) {
             } else {
                 lastNameMap[nationality.random()]?.random() ?: ""
             }
+        }
+
+        @JvmOverloads
+        fun profession(includeRanking: Boolean = false): String {
+            val rankings = listOf("Apprentice", "Junior", "Senior", "Lead")
+            val profession = professions.random()
+            val rank = if (includeRanking) {
+                rankings.random() + " "
+            } else {
+                ""
+            }
+            return "$rank$profession"
         }
     }
 }
