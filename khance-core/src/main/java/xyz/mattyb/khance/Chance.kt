@@ -2,7 +2,6 @@ package xyz.mattyb.khance
 
 import xyz.mattyb.checkmate.CheckMate
 import xyz.mattyb.khance.enums.*
-import xyz.mattyb.khance.enums.professions
 import java.util.*
 import kotlin.math.floor
 
@@ -89,9 +88,8 @@ class Chance(private val seed: Long = Random().nextLong()) {
 
     /******************** Person ********************/
 
-    private val person = Person(this)
-
-    fun person() = person
+    @JvmField
+    val person = Person(this)
 
     class Person(private val chance: Chance) {
 
@@ -180,6 +178,16 @@ class Chance(private val seed: Long = Random().nextLong()) {
             } else {
                 lastNameMap[nationality.random()]?.random() ?: ""
             }
+        }
+    }
+
+    @JvmField
+    val employment = Employment(this)
+
+    class Employment(private val chance: Chance) {
+
+        fun company(): String {
+            return companies.random()
         }
 
         @JvmOverloads

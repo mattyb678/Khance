@@ -1,4 +1,4 @@
-package xyz.mattyb.khance.enums
+package xyz.mattyb.khance
 
 internal val professions = listOf(
         "Airline Pilot",
