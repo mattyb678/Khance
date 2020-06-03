@@ -2,6 +2,7 @@ package xyz.mattyb.khance;
 
 import org.junit.jupiter.api.Test;
 import xyz.mattyb.khance.enums.AgeType;
+import xyz.mattyb.khance.enums.Gender;
 import xyz.mattyb.khance.enums.Nationality;
 import xyz.mattyb.khance.testutils.BaseChanceTest;
 
@@ -123,8 +124,42 @@ public class PersonChanceTest extends BaseChanceTest {
         List<String> combined = new ArrayList<>();
         combined.addAll(FirstNamesKt.ENG_MALE_FIRST_NAMES);
         combined.addAll(FirstNamesKt.ENG_FEMALE_FIRST_NAMES);
+        combined.addAll(FirstNamesKt.ITALY_MALE_FIRST_NAMES);
+        combined.addAll(FirstNamesKt.ITALY_FEMALE_FIRST_NAMES);
+        combined.addAll(FirstNamesKt.NETHERLANDS_MALE_FIRST_NAMES);
+        combined.addAll(FirstNamesKt.NETHERLANDS_FEMALE_FIRST_NAMES);
+        combined.addAll(FirstNamesKt.FRANCE_MALE_FIRST_NAMES);
+        combined.addAll(FirstNamesKt.FRANCE_FEMALE_FIRST_NAMES);
         thousand(i -> {
             String name = chance.person().first();
+            assertThat(name, not(isEmptyOrNullString()));
+            assertThat(combined, hasItem(name));
+        });
+    }
+
+    @Test
+    public void testFirstName_Female() {
+        List<String> combined = new ArrayList<>();
+        combined.addAll(FirstNamesKt.ENG_FEMALE_FIRST_NAMES);
+        combined.addAll(FirstNamesKt.ITALY_FEMALE_FIRST_NAMES);
+        combined.addAll(FirstNamesKt.NETHERLANDS_FEMALE_FIRST_NAMES);
+        combined.addAll(FirstNamesKt.FRANCE_FEMALE_FIRST_NAMES);
+        thousand(i -> {
+            String name = chance.person().first(Gender.FEMALE);
+            assertThat(name, not(isEmptyOrNullString()));
+            assertThat(combined, hasItem(name));
+        });
+    }
+
+    @Test
+    public void testFirstName_Male() {
+        List<String> combined = new ArrayList<>();
+        combined.addAll(FirstNamesKt.ENG_MALE_FIRST_NAMES);
+        combined.addAll(FirstNamesKt.ITALY_MALE_FIRST_NAMES);
+        combined.addAll(FirstNamesKt.NETHERLANDS_MALE_FIRST_NAMES);
+        combined.addAll(FirstNamesKt.FRANCE_MALE_FIRST_NAMES);
+        thousand(i -> {
+            String name = chance.person().first(Gender.MALE);
             assertThat(name, not(isEmptyOrNullString()));
             assertThat(combined, hasItem(name));
         });

@@ -107,6 +107,18 @@ class Chance(private val seed: Long = Random().nextLong()) {
                 Nationality.UK to mapOf(
                         Gender.MALE to ENG_MALE_FIRST_NAMES,
                         Gender.FEMALE to ENG_FEMALE_FIRST_NAMES
+                ),
+                Nationality.ITALY to mapOf(
+                        Gender.MALE to ITALY_MALE_FIRST_NAMES,
+                        Gender.FEMALE to ITALY_FEMALE_FIRST_NAMES
+                ),
+                Nationality.NETHERLANDS to mapOf(
+                        Gender.MALE to NETHERLANDS_MALE_FIRST_NAMES,
+                        Gender.FEMALE to NETHERLANDS_FEMALE_FIRST_NAMES
+                ),
+                Nationality.FRANCE to mapOf(
+                        Gender.MALE to FRANCE_MALE_FIRST_NAMES,
+                        Gender.FEMALE to FRANCE_FEMALE_FIRST_NAMES
                 )
         )
 
@@ -139,12 +151,28 @@ class Chance(private val seed: Long = Random().nextLong()) {
                     .random()
         }
 
-        fun first(vararg nationality: Nationality): String {
-            val gender = Gender.values().random()
+        @JvmOverloads
+        fun name(
+                middle: Boolean = false, middleInitial: Boolean = false, gender: Gender? = null,
+                vararg nationality: Nationality
+        ): String {
+            val first = first(gender, *nationality)
+            val middleName = when {
+                middle -> " " + first(gender, *nationality)
+                middleInitial -> " " + chance.letter(Casing.UPPER)
+                else -> ""
+            }
+            val last = last(*nationality)
+            return "$first$middleName $last"
+        }
+
+        @JvmOverloads
+        fun first(gender: Gender? = null, vararg nationality: Nationality): String {
+            val genderToUse = gender ?: Gender.values().random()
             return if (nationality.isEmpty()) {
-                firstNameMap[firstNameMap.keys.random()]?.get(gender)?.random() ?: ""
+                firstNameMap[firstNameMap.keys.random()]?.get(genderToUse)?.random() ?: ""
             } else {
-                firstNameMap[nationality.random()]?.get(gender)?.random() ?: ""
+                firstNameMap[nationality.random()]?.get(genderToUse)?.random() ?: ""
             }
         }
 
