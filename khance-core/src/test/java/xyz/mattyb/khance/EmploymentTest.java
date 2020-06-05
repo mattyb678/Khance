@@ -13,4 +13,9 @@ public class EmploymentTest extends BaseChanceTest {
     public void testCompanies() {
         thousand(i -> assertThat(CompaniesKt.getCompanies(), hasItem(chance.employment.company())));
     }
+
+    @Test
+    public void testProfession() {
+        thousand(i -> assertThat(ProfessionsKt.getProfessions(), hasItem(chance.employment.profession())));
+    }
 }
