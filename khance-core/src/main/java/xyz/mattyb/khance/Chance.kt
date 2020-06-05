@@ -179,6 +179,20 @@ class Chance(private val seed: Long = Random().nextLong()) {
                 lastNameMap[nationality.random()]?.random() ?: ""
             }
         }
+
+        @JvmOverloads
+        fun ssn(lastFourOnly: Boolean = false, dashes: Boolean = true): String {
+            val sb = StringBuilder()
+            val dash = if (dashes) "-" else ""
+            if (!lastFourOnly) {
+                (1..3).forEach { _ -> sb.append(chance.natural(0, 9)) }
+                sb.append(dash)
+                (1..2).forEach { _ -> sb.append(chance.natural(0, 9)) }
+                sb.append(dash)
+            }
+            (1..4).forEach { _ -> sb.append(chance.natural(0, 9)) }
+            return sb.toString()
+        }
     }
 
     @JvmField

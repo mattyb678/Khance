@@ -164,4 +164,13 @@ public class PersonChanceTest extends BaseChanceTest {
             assertThat(combined, hasItem(name));
         });
     }
+
+    @Test
+    public void testSsn() {
+        thousand(i -> {
+            assertThat(chance.person.ssn().length() == 11, is(true));
+            assertThat(chance.person.ssn(true).length() == 4, is(true));
+            assertThat(chance.person.ssn(false, false).length() == 9, is(true));
+        });
+    }
 }
