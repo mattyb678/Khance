@@ -34,6 +34,6 @@ public class WebTest extends BaseChanceTest {
 
     @Test
     public void testTld_Country() {
-        thousand(i -> assertThat(TldsKt.getOriginalTlds(), hasItem(chance.web.tld(TldType.COUNTRY))));
+        thousand(i -> assertThat(TldsKt.getCountryTlds(), hasItem(chance.web.tld(TldType.COUNTRY))));
     }
 }
