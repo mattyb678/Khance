@@ -1,4 +1,4 @@
-# Khance ![Build](https://github.com/mattyb678/Khance/workflows/Publish%20package%20to%20the%20Maven%20Central%20Repository/badge.svg?branch=master) [![GitHub license](https://img.shields.io/github/license/mattyb678/Khance.svg)](https://github.com/mattyb678/Khance/blob/master/LICENSE)
+# Khance ![Build pipeline](https://github.com/mattyb678/Khance/workflows/Build%20pipeline/badge.svg) [![GitHub license](https://img.shields.io/github/license/mattyb678/Khance.svg)](https://github.com/mattyb678/Khance/blob/master/LICENSE)
 Generate realistic fake data for testing
 
 ![Checkmate logo small](assets/khance.png)
