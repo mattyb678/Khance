@@ -216,4 +216,17 @@ class Chance(private val seed: Long = Random().nextLong()) {
             return "$rank$profession"
         }
     }
+
+    @JvmField
+    val web = Web(this)
+
+    class Web(private val chance: Chance) {
+        fun ip(): String {
+            val first = chance.natural(1, 254)
+            val second = chance.natural(0, 255)
+            val third = chance.natural(0, 255)
+            val fourth = chance.natural(1, 254)
+            return "$first.$second.$third.$fourth"
+        }
+    }
 }
