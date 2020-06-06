@@ -5,10 +5,6 @@ Generate realistic fake data for testing
 
 Inspired by [Chance.js](https://github.com/chancejs/chancejs)
 
-#### Code coverage
-There is an issue with Kotlin and reporting code coverage when the kotlin compiler 
-inlines functions. So, in reality, code coverage is around 80%. Trust me.
-
 ### Todo
 - Basic functions
     - Symbols
