@@ -221,6 +221,20 @@ class Chance(private val seed: Long = Random().nextLong()) {
     val web = Web(this)
 
     class Web(private val chance: Chance) {
+
+        @JvmOverloads
+        fun tld(vararg tldTypes: TldType = arrayOf(TldType.ORIGINAL)): String {
+            var types = sequenceOf<String>()
+            tldTypes.forEach {
+                when (it) {
+                    TldType.ORIGINAL -> types = types.plus(originalTlds)
+                    TldType.COUNTRY -> types = types.plus(countryTlds)
+                    else -> {}
+                }
+            }
+            return types.toSet().random()
+        }
+
         fun ip(): String {
             val first = chance.natural(1, 254)
             val second = chance.natural(0, 255)
