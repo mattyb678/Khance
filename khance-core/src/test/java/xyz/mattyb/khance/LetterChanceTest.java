@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import xyz.mattyb.khance.enums.Casing;
 import xyz.mattyb.khance.testutils.BaseChanceTest;
 
+import java.util.regex.Pattern;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static xyz.mattyb.khance.test.utils.CharacterMatchesPattern.charMatchesPattern;
@@ -92,6 +94,36 @@ public class LetterChanceTest extends BaseChanceTest {
         thousand(i -> {
             final char character = chance.hex(Casing.UPPER);
             assertThat(character, charMatchesPattern("[0-9A-F]"));
+        });
+    }
+
+    @Test
+    public void testHash() {
+        Pattern hashPattern = Pattern.compile("^[0-9a-f]{40}$");
+        thousand(i -> {
+            String hash = chance.hash();
+            assertThat(hash, matchesPattern(hashPattern));
+        });
+    }
+
+    @Test
+    public void testHash_Length() {
+        Pattern hashPattern = Pattern.compile("^[0-9a-f]{15}$");
+        thousand(i -> {
+            String hash = chance.hash(15);
+            assertThat(hash, matchesPattern(hashPattern));
+        });
+    }
+
+    @Test
+    public void testHash_Casing() {
+        Pattern upperPattern = Pattern.compile("^[0-9A-F]{40}$");
+        Pattern mixedPattern = Pattern.compile("^[0-9A-Fa-f]{40}$");
+        thousand(i -> {
+            String upper = chance.hash(40, Casing.UPPER);
+            assertThat(upper, matchesPattern(upperPattern));
+            String mixed = chance.hash(40, Casing.MIXED);
+            assertThat(mixed, matchesPattern(mixedPattern));
         });
     }
 }
