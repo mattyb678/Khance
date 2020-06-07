@@ -230,6 +230,13 @@ class Chance(private val seed: Long = Random().nextLong()) {
                     TldType.ORIGINAL -> types = types.plus(originalTlds)
                     TldType.COUNTRY -> types = types.plus(countryTlds)
                     TldType.GENERIC -> types = types.plus(genericTlds)
+                    TldType.GENERIC_CHINESE -> types = types.plus(genericChineseTlds)
+                    TldType.GENERIC_FRENCH -> types = types.plus(genericFrenchTlds)
+                    TldType.GENERIC_GERMAN -> types = types.plus(genericGermanTlds)
+                    TldType.GENERIC_HINDI -> types = types.plus(genericHindiTlds)
+                    TldType.GENERIC_ITALIAN -> types = types.plus(genericItalianTlds)
+                    TldType.GENERIC_PORTUGUESE -> types = types.plus(genericPortugueseTlds)
+                    TldType.GENERIC_SPANISH -> types = types.plus(genericSpanishTlds)
                     else -> {}
                 }
             }

@@ -84,3 +84,33 @@ internal val genericTlds = listOf(
         "wiki", "win", "wine", "winners", "work", "works", "world", "wow", "wtf", "xxx", "xyz",
         "yachts", "yoga", "you", "zero", "zone"
 )
+
+internal val genericChineseTlds = listOf(
+        "ren", "shouji", "tushu", "wanggou", "weibo", "xihuan", "xin"
+)
+
+internal val genericFrenchTlds = listOf(
+        "arte", "clinique", "luxe", "maison", "moi", "rsvp", "sarl"
+)
+
+internal val genericGermanTlds = listOf(
+        "berlin", "epost", "gmbh", "haus", "immobilien", "jetzt", "kaufen", "kinder", "reise",
+        "reisen", "schule", "versicherung"
+)
+
+internal val genericHindiTlds = listOf(
+        "desi", "shiksha"
+)
+
+internal val genericItalianTlds = listOf(
+        "casa", "immo", "moda", "voto"
+)
+
+internal val genericPortugueseTlds = listOf(
+        "bom", "passagens"
+)
+
+internal val genericSpanishTlds = listOf(
+        "abogado", "futbol", "gratis", "hoteles", "juegos", "ltda", "soy", "tienda", "uno",
+        "viajes", "vuelos"
+)
