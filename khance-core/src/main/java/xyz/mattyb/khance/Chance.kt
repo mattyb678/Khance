@@ -229,6 +229,7 @@ class Chance(private val seed: Long = Random().nextLong()) {
                 when (it) {
                     TldType.ORIGINAL -> types = types.plus(originalTlds)
                     TldType.COUNTRY -> types = types.plus(countryTlds)
+                    TldType.GENERIC -> types = types.plus(genericTlds)
                     else -> {}
                 }
             }
