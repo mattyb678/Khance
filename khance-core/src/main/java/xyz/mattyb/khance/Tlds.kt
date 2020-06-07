@@ -114,3 +114,32 @@ internal val genericSpanishTlds = listOf(
         "abogado", "futbol", "gratis", "hoteles", "juegos", "ltda", "soy", "tienda", "uno",
         "viajes", "vuelos"
 )
+
+internal val geoAfricaTlds = listOf(
+        "africa", "capetown", "durban", "joburg"
+)
+
+internal val geoAsiaTlds = listOf(
+        "abudhabi", "arab", "asia", "doha", "dubai", "krd", "kyoto", "nagoya", "okinawa",
+        "osaka", "ryukyu", "taipei", "tatar", "tokyo", "yokohama"
+)
+
+internal val geoEuropeTlds = listOf(
+        "alsace", "amsterdam", "bar", "bcn", "barcelona", "bayern", "berlin", "brussels",
+        "budapest", "bzh", "cat", "cologne", "corsica", "cymru", "eus", "frl", "gal", "gent",
+        "hamburg", "helsinki", "irish", "ist", "istanbul", "koeln", "london", "madrid", "moscow",
+        "nrw", "paris", "ruhr", "saarland", "scot", "stockholm", "swiss", "tirol", "vlaanderen",
+        "wales", "wien", "zuerich"
+)
+
+internal val geoNorthAmericaTlds = listOf(
+        "boston", "miami", "nyc", "quebec", "vegas"
+)
+
+internal val geoOceaniaTlds = listOf(
+        "kiwi", "melbourne", "sydney"
+)
+
+internal val geoSouthAmericaTlds = listOf(
+        "lat", "rio"
+)

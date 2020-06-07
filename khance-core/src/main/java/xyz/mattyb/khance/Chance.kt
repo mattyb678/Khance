@@ -237,6 +237,12 @@ class Chance(private val seed: Long = Random().nextLong()) {
                     TldType.GENERIC_ITALIAN -> types = types.plus(genericItalianTlds)
                     TldType.GENERIC_PORTUGUESE -> types = types.plus(genericPortugueseTlds)
                     TldType.GENERIC_SPANISH -> types = types.plus(genericSpanishTlds)
+                    TldType.GEOGRAPHIC_AFRICA -> types = types.plus(geoAfricaTlds)
+                    TldType.GEOGRAPHIC_ASIA -> types = types.plus(geoAsiaTlds)
+                    TldType.GEOGRAPHIC_EUROPE -> types = types.plus(geoEuropeTlds)
+                    TldType.GEOGRAPHIC_NORTH_AMERICA -> types = types.plus(geoNorthAmericaTlds)
+                    TldType.GEOGRAPHIC_OCEANIA -> types = types.plus(geoOceaniaTlds)
+                    TldType.GEOGRAPHIC_SOUTH_AMERICA -> types = types.plus(geoSouthAmericaTlds)
                     else -> {}
                 }
             }
