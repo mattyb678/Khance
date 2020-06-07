@@ -228,6 +228,7 @@ class Chance(private val seed: Long = Random().nextLong()) {
             tldTypes.forEach {
                 when (it) {
                     TldType.ORIGINAL -> types = types.plus(originalTlds)
+                    TldType.BRAND -> types = types.plus(brandTlds)
                     TldType.COUNTRY -> types = types.plus(countryTlds)
                     TldType.GENERIC -> types = types.plus(genericTlds)
                     TldType.GENERIC_CHINESE -> types = types.plus(genericChineseTlds)
@@ -243,7 +244,9 @@ class Chance(private val seed: Long = Random().nextLong()) {
                     TldType.GEOGRAPHIC_NORTH_AMERICA -> types = types.plus(geoNorthAmericaTlds)
                     TldType.GEOGRAPHIC_OCEANIA -> types = types.plus(geoOceaniaTlds)
                     TldType.GEOGRAPHIC_SOUTH_AMERICA -> types = types.plus(geoSouthAmericaTlds)
-                    else -> {}
+                    TldType.SPECIAL_USE -> types = types.plus(specialUseTlds)
+                    else -> {
+                    }
                 }
             }
             return types.toSet().random()
