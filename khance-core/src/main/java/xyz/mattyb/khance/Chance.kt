@@ -97,6 +97,33 @@ class Chance(private val seed: Long = Random().nextLong()) {
         return Math.pow(this.toDouble(), power.toDouble()).toInt()
     }
 
+    /******************** Dice ********************/
+
+    @JvmField
+    val dice = Dice(this)
+
+    class Dice(private val chance: Chance) {
+        fun d4(): Int {
+            return chance.natural(1, 4)
+        }
+
+        fun d4(rollCount: Int): List<Int> {
+            return (1..rollCount).map { d4() }
+        }
+
+        fun d6(): Int {
+            return chance.natural(1, 6)
+        }
+
+        fun d6(rollCount: Int): List<Int> {
+            return (1..rollCount).map { d6() }
+        }
+
+        fun d8(): Int {
+            return chance.natural(1, 8)
+        }
+    }
+
     /******************** Person ********************/
 
     @JvmField

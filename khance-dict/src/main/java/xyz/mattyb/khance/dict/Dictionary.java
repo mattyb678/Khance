@@ -60,7 +60,7 @@ public class Dictionary {
             URI uri = Dictionary.class.getResource(fileName).toURI();
             Path myPath;
             if (uri.getScheme().equals("jar")) {
-                FileSystem fileSystem = FileSystems.newFileSystem(uri, Collections.<String, Object>emptyMap());
+                FileSystem fileSystem = getFileSystem(uri);
                 myPath = fileSystem.getPath(fileName);
             } else {
                 myPath = Paths.get(uri);
@@ -68,6 +68,14 @@ public class Dictionary {
             return myPath;
         } catch (Exception ex) {
             throw new RuntimeException(ex);
+        }
+    }
+
+    private static FileSystem getFileSystem(URI uri) throws IOException {
+        try {
+            return FileSystems.newFileSystem(uri, Collections.<String, Object> emptyMap());
+        } catch (FileSystemAlreadyExistsException e) {
+            return FileSystems.getFileSystem(uri);
         }
     }
 }
