@@ -22,11 +22,16 @@
         </dependency>
         <dependency>
             <groupId>xyz.mattyb</groupId>
+            <artifactId>khance-dict</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>xyz.mattyb</groupId>
             <artifactId>khance-test-utils</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
-
         <!-- To avoid compiler warnings about @API annotations in JUnit code -->
         <dependency>
             <groupId>org.apiguardian</groupId>

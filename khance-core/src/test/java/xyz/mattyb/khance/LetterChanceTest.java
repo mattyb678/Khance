@@ -126,4 +126,9 @@ public class LetterChanceTest extends BaseChanceTest {
             assertThat(mixed, matchesPattern(mixedPattern));
         });
     }
+
+    @Test
+    public void testWord() {
+        thousand(i -> System.out.println(chance.word()));
+    }
 }

@@ -1,6 +1,7 @@
 package xyz.mattyb.khance
 
 import xyz.mattyb.checkmate.CheckMate
+import xyz.mattyb.khance.dict.Dictionary
 import xyz.mattyb.khance.enums.*
 import java.util.*
 import kotlin.math.floor
@@ -59,6 +60,11 @@ class Chance(private val seed: Long = Random().nextLong()) {
 
     fun string(length: Int, casing: Casing): String {
         return internalString(length = length, casing = casing)
+    }
+
+    @JvmOverloads
+    fun word(length: Int = natural(3, 7)): String {
+        return Dictionary.getWord(length)
     }
 
     @JvmOverloads
@@ -259,7 +265,7 @@ class Chance(private val seed: Long = Random().nextLong()) {
 
         @JvmOverloads
         fun domain(tld: String? = null): String {
-            return "${chance.string(chance.natural(4, 12))}.${tld ?: tld(TldType.COUNTRY, TldType.ORIGINAL)}"
+            return "${chance.word()}.${tld ?: tld(TldType.COUNTRY, TldType.ORIGINAL)}"
         }
 
         fun ip(): String {
