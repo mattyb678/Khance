@@ -257,6 +257,11 @@ class Chance(private val seed: Long = Random().nextLong()) {
             return types.toSet().random()
         }
 
+        @JvmOverloads
+        fun domain(tld: String? = null): String {
+            return "${chance.string(chance.natural(4, 12))}.${tld ?: tld(TldType.COUNTRY, TldType.ORIGINAL)}"
+        }
+
         fun ip(): String {
             val first = chance.natural(1, 254)
             val second = chance.natural(0, 255)

@@ -41,4 +41,9 @@ public class WebTest extends BaseChanceTest {
     public void testTld_Generic() {
         thousand(i -> assertThat(TldsKt.getGenericTlds(), hasItem(chance.web.tld(TldType.GENERIC))));
     }
+
+    @Test
+    public void testDomain() {
+        thousand(i -> System.out.println(chance.web.domain()));
+    }
 }
