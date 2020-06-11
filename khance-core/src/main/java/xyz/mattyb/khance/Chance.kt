@@ -369,7 +369,8 @@ class Chance(private val seed: Long = Random().nextLong()) {
             var names = sequenceOf<String>()
             continents.forEach {
                 when (it) {
-                    Continent.AFRICA -> names = names.plus(africanCityNames)
+                    Continent.AFRICA -> names = names.plus(africanCityNames.random())
+                    Continent.ASIA -> names = names.plus(asianCityNames.random())
                     else -> { }
                 }
             }
