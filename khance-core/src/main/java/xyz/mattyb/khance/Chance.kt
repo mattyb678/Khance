@@ -103,24 +103,77 @@ class Chance(private val seed: Long = Random().nextLong()) {
     val dice = Dice(this)
 
     class Dice(private val chance: Chance) {
+
+        fun die(limitInclusive: Int): Int {
+            return chance.natural(1, limitInclusive)
+        }
+
+        fun die(limitInclusive: Int, rollCount: Int): List<Int> {
+            return (1..rollCount).map { die(limitInclusive) }
+        }
+
         fun d4(): Int {
-            return chance.natural(1, 4)
+            return die(4)
         }
 
         fun d4(rollCount: Int): List<Int> {
-            return (1..rollCount).map { d4() }
+            return die(4, rollCount)
         }
 
         fun d6(): Int {
-            return chance.natural(1, 6)
+            return die(6)
         }
 
         fun d6(rollCount: Int): List<Int> {
-            return (1..rollCount).map { d6() }
+            return die(6, rollCount)
         }
 
         fun d8(): Int {
-            return chance.natural(1, 8)
+            return die(8)
+        }
+
+        fun d8(rollCount: Int): List<Int> {
+            return die(8, rollCount)
+        }
+
+        fun d10(): Int {
+            return die(10)
+        }
+
+        fun d10(rollCount: Int): List<Int> {
+            return die(10, rollCount)
+        }
+
+        fun d12(): Int {
+            return die(12)
+        }
+
+        fun d12(rollCount: Int): List<Int> {
+            return die(12, rollCount)
+        }
+
+        fun d20(): Int {
+            return die(20)
+        }
+
+        fun d20(rollCount: Int): List<Int> {
+            return die(20, rollCount)
+        }
+
+        fun d30(): Int {
+            return die(30)
+        }
+
+        fun d30(rollCount: Int): List<Int> {
+            return die(30, rollCount)
+        }
+
+        fun d100(): Int {
+            return die(100)
+        }
+
+        fun d100(rollCount: Int): List<Int> {
+            return die(100, rollCount)
         }
     }
 
