@@ -363,8 +363,8 @@ class Chance(private val seed: Long = Random().nextLong()) {
     class Location(private val chance: Chance) {
 
         @JvmOverloads
-        fun city(vararg continents: Continent = arrayOf(Continent.AFRICA, Continent.ANTARCTICA,
-                Continent.ASIA, Continent.AUSTRALIA, Continent.EUROPE, Continent.NORTH_AMERICA,
+        fun city(vararg continents: Continent = arrayOf(Continent.AFRICA, Continent.ASIA,
+                Continent.AUSTRALIA, Continent.EUROPE, Continent.NORTH_AMERICA,
                 Continent.SOUTH_AMERICA)): String {
             var names = sequenceOf<String>()
             continents.forEach {
@@ -373,6 +373,7 @@ class Chance(private val seed: Long = Random().nextLong()) {
                     Continent.ASIA -> names = names.plus(asianCityNames.random())
                     Continent.AUSTRALIA -> names = names.plus(australianCityNames.random())
                     Continent.EUROPE -> names = names.plus(europeanCityNames.random())
+                    Continent.SOUTH_AMERICA -> names = names.plus(southAmericanCityNames.random())
                     else -> { }
                 }
             }

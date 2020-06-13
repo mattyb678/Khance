@@ -60,3 +60,19 @@ internal val europeanCityNames = listOf(
         "Timișoara", "Córdoba", "Thessaloniki", "Cluj-Napoca", "Bari", "Constanța", "Münster",
         "Karlsruhe", "Catania", "Mannheim", "Nantes", "Galați", "Craiova"
 )
+
+internal val southAmericanCityNames = listOf(
+        "São Paulo", "Lima", "Bogotá", "Rio de Janeiro", "Santiago", "Caracas", "Buenos Aires",
+        "Salvador", "Brasília", "Fortaleza", "Guayaquil", "Quito", "Belo Horizonte", "Medellín",
+        "Cali", "Manaus", "Curitiba", "Maracaibo", "Recife", "Santa Cruz de la Sierra", "Belém",
+        "Porto Alegre", "Goiânia", "Córdoba", "Montevideo", "Guarulhos", "Barranquilla", "Campinas",
+        "Barquisimeto", "São Luís", "São Gonçalo", "Maceió", "Callao", "Rosario", "Cartagena",
+        "Valencia", "El Alto", "Duque de Caxias", "Ciudad Guayana", "Natal", "Arequipa", "Teresina",
+        "Campo Grande", "São Bernardo do Campo", "Nova Iguaçu", "Trujillo", "João Pessoa", "La Paz",
+        "Santo André", "Osasco", "São José dos Campos", "La Plata", "Jaboatão dos Guararapes",
+        "Cochabamba", "Ribeirão Preto", "Uberlândia", "Contagem", "Sorocaba", "Mar del Plata",
+        "Aracaju", "Cúcuta", "Feira de Santana", "Soledad", "Puente Alto", "Chiclayo", "Salta",
+        "San Miguel de Tucumán", "Maturín", "Cuenca", "Cuiabá", "Joinville", "Juiz de Fora",
+        "Londrina", "Asunción", "Ibagué", "Aparecida de Goiânia", "Bucaramanga", "Ananindeua",
+        "Soacha", "Porto Velho"
+)
