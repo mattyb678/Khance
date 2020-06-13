@@ -2,10 +2,12 @@ package xyz.mattyb.khance;
 
 import org.junit.jupiter.api.Test;
 import xyz.mattyb.khance.enums.Continent;
+import xyz.mattyb.khance.enums.CountryCode;
 import xyz.mattyb.khance.testutils.BaseChanceTest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -65,6 +67,30 @@ class LocationTest extends BaseChanceTest {
         thousand(i -> {
             String cityName = chance.location.city(Continent.SOUTH_AMERICA);
             assertThat(CityNamesKt.getSouthAmericanCityNames(), hasItem(cityName));
+        });
+    }
+
+    @Test
+    void testCountry() {
+        List<String> countries = CountryCode.getAll()
+                .stream()
+                .map(CountryCode::getFullName)
+                .collect(Collectors.toList());
+        thousand(i -> {
+            String country = chance.location.country();
+            assertThat(countries, hasItem(country));
+        });
+    }
+
+    @Test
+    void testCountry_Code() {
+        List<String> countries = CountryCode.getAll()
+                .stream()
+                .map(CountryCode::toString)
+                .collect(Collectors.toList());
+        thousand(i -> {
+            String countryCode = chance.location.country(true);
+            assertThat(countries, hasItem(countryCode));
         });
     }
 }

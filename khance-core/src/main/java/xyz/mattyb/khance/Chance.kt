@@ -380,5 +380,14 @@ class Chance(private val seed: Long = Random().nextLong()) {
             }
             return names.toList().random()
         }
+
+        @JvmOverloads
+        fun country(code: Boolean = false): String {
+            return if (code) {
+                CountryCode.all.random().toString()
+            } else {
+                CountryCode.all.random().fullName
+            }
+        }
     }
 }
