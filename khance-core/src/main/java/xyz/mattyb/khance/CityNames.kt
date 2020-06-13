@@ -32,3 +32,16 @@ internal val asianCityNames = listOf(
         "Novosibirsk", "Caloocan", "Yekaterinburg", "Fukuoka", "Kyoto", "Kawasaki", "Omsk",
         "Ranchi", "Chelyabinsk", "Krasnoyarsk", "Yerevan", "Tbilisi", "Nur-Sultan", "Shymkent"
 )
+
+internal val australianCityNames = listOf(
+        "Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide", "Tweed Heads", "Maitland",
+        "Queanbeyan", "Sunshine Coast", "Wollongong", "Geelong", "Hobart", "Townsville", "Cairns",
+        "Darwin", "Toowoomba", "Ballarat", "Bendigo", "Albury", "Wodonga", "Launceston", "Mackay",
+        "Rockhampton", "Bunbury", "Coffs Harbour", "Bundaberg", "Wagga Wagga", "Hervey Bay",
+        "Mildura", "Wentworth", "Mooroopna", "Shepparton", "Port Macquarie", "Tannum Sands",
+        "Gladstone", "Tamworth", "Morwell", "Traralgon", "Orange", "Mittagong", "Bowral", "Dubbo",
+        "Busselton", "Drouin", "Warragul", "Geraldton", "Bomaderry", "Nowra", "Bathurst",
+        "Warrnambool", "Albany", "Devonport", "Boulder", "Kalgoorlie", "Mount Gambier", "Lismore",
+        "Nelson Bay", "Maryborough", "Wynyard", "Burnie", "Alice Springs", "Goolwa", "Ballina",
+        "Victor Harbor", "Taree", "Cooranbong", "Morisset", "Armidale", "Goulburn"
+)

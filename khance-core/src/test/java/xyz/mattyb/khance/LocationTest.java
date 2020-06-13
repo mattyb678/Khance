@@ -26,4 +26,12 @@ class LocationTest extends BaseChanceTest {
         });
     }
 
+    @Test
+    void testCity_Australia() {
+        thousand(i -> {
+            String cityName = chance.location.city(Continent.AUSTRALIA);
+            assertThat(CityNamesKt.getAustralianCityNames(), hasItem(cityName));
+        });
+    }
+
 }
