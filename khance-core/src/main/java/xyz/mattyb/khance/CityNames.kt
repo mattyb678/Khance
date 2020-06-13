@@ -45,3 +45,18 @@ internal val australianCityNames = listOf(
         "Nelson Bay", "Maryborough", "Wynyard", "Burnie", "Alice Springs", "Goolwa", "Ballina",
         "Victor Harbor", "Taree", "Cooranbong", "Morisset", "Armidale", "Goulburn"
 )
+
+internal val europeanCityNames = listOf(
+        "Berlin", "Madrid", "Rome", "Bucharest", "Paris", "Vienna", "Hamburg", "Warsaw", "Budapest",
+        "Barcelona", "Munich", "Milan", "Prague", "Sofia", "Cologne", "Stockholm", "Naples",
+        "Turin", "Amsterdam", "Marseille", "Zagreb", "Valencia", "Kraków", "Frankfurt", "Seville",
+        "Łódź", "Zaragoza", "Athens", "Palermo", "Rotterdam", "Helsinki", "Wrocław", "Stuttgart",
+        "Riga", "Copenhagen", "Düsseldorf", "Leipzig", "Dortmund", "Essen", "Gothenburg", "Genoa",
+        "Málaga", "Bremen", "Vilnius", "Dublin", "Dresden", "The Hague", "Hanover", "Poznań",
+        "Antwerp", "Nuremberg", "Lyon", "Lisbon", "Duisburg", "Toulouse", "Gdańsk", "Murcia",
+        "Tallinn", "Bratislava", "Palma de Mallorca", "Szczecin", "Bologna", "Brno", "Iași",
+        "Florence", "Las Palmas", "Bochum", "Utrecht", "Wuppertal", "Bydgoszcz", "Aarhus",
+        "Plovdiv", "Bilbao", "Malmö", "Nice", "Lublin", "Varna", "Bielefeld", "Alicante", "Bonn",
+        "Timișoara", "Córdoba", "Thessaloniki", "Cluj-Napoca", "Bari", "Constanța", "Münster",
+        "Karlsruhe", "Catania", "Mannheim", "Nantes", "Galați", "Craiova"
+)
