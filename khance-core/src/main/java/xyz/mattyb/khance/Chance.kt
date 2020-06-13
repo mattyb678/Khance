@@ -374,7 +374,7 @@ class Chance(private val seed: Long = Random().nextLong()) {
                     Continent.AUSTRALIA -> names = names.plus(australianCityNames.random())
                     Continent.EUROPE -> names = names.plus(europeanCityNames.random())
                     Continent.NORTH_AMERICA -> names.plus(northAmericanCityNames.random())
-                    Continent.SOUTH_AMERICA -> names = names.plus(southAmericanCityNames.random())
+                    Continent.SOUTH_AMERICA -> names = names.plus(northAmericanCityNames.random())
                     else -> { }
                 }
             }
