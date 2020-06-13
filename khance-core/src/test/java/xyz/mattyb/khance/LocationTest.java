@@ -56,7 +56,6 @@ class LocationTest extends BaseChanceTest {
     void testCity_NorthAmerica() {
         thousand(i -> {
             String cityName = chance.location.city(Continent.NORTH_AMERICA);
-
             assertThat(CityNamesKt.getNorthAmericanCityNames(), hasItem(cityName));
         });
     }
