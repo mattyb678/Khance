@@ -1,5 +1,6 @@
 package xyz.mattyb.khance.enums
 
+// from https://github.com/umpirsky/country-list/blob/master/data/en_US/country.json
 enum class CountryCode(val fullName: String) {
     AF("Afghanistan"),
     AX("\u00c5land Islands"),
