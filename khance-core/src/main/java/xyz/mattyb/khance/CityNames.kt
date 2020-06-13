@@ -76,3 +76,21 @@ internal val southAmericanCityNames = listOf(
         "Londrina", "Asunción", "Ibagué", "Aparecida de Goiânia", "Bucaramanga", "Ananindeua",
         "Soacha", "Porto Velho"
 )
+
+internal val northAmericanCityNames = listOf(
+        "Mexico City", "New York City", "Los Angeles", "Toronto", "Chicago", "Houston", "Havana",
+        "Montreal", "Ecatepec de Morelos", "Philadelphia", "Phoenix", "San Antonio", "Guadalajara",
+        "Puebla", "San Diego", "Juárez", "León", "Dallas", "Tijuana", "Calgary", "Tegucigalpa",
+        "Zapopan", "Monterrey", "Managua", "Nezahualcóyotl", "San Jose", "Santo Domingo",
+        "Guatemala City", "Port-au-Prince", "Naucalpan", "Ottawa", "Austin", "Edmonton", "Mérida",
+        "Querétaro", "Toluca", "Jacksonville", "Chihuahua", "San Francisco", "Indianapolis",
+        "Columbus", "Fort Worth", "Charlotte", "Hermosillo", "Saltillo", "Aguascalientes",
+        "Mississauga", "San Luis Potosí", "Veracruz", "San Pedro Sula", "Culiacán", "Winnipeg",
+        "Santiago de los Caballeros", "Mexicali", "Cancún", "Acapulco", "Tlalnepantla", "Seattle",
+        "Guadalupe", "Denver", "El Paso", "Chimalhuacán", "Detroit", "Washington, D.C.", "Kingston",
+        "Boston", "Tlaquepaque", "Memphis", "Nashville", "Torreón", "Vancouver", "Portland",
+        "Reynosa", "Oklahoma City", "Las Vegas", "Baltimore", "Brampton", "Louisville", "Morelia",
+        "Milwaukee", "Tuxtla Gutiérrez", "Apodaca", "Durango", "Villa Nueva", "Albuquerque",
+        "Hamilton", "Quebec City", "Tonalá", "Tucson", "Cuautitlán Izcalli", "Surrey", "Tultitlán",
+        "Ciudad López Mateos", "Fresno", "Carrefour"
+)
