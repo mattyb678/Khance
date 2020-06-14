@@ -3,6 +3,7 @@ package xyz.mattyb.khance
 import xyz.mattyb.checkmate.CheckMate
 import xyz.mattyb.khance.dict.Dictionary
 import xyz.mattyb.khance.enums.*
+import xyz.mattyb.khance.enums.Currency
 import java.util.*
 import kotlin.math.floor
 
@@ -358,6 +359,8 @@ class Chance(private val seed: Long = Random().nextLong()) {
         }
     }
 
+    /******************** Location ********************/
+
     @JvmField
     val location = Location(this)
 
@@ -388,6 +391,23 @@ class Chance(private val seed: Long = Random().nextLong()) {
                 CountryCode.all.random().toString()
             } else {
                 CountryCode.all.random().fullName
+            }
+        }
+    }
+
+    /******************** Finance ********************/
+
+    @JvmField
+    val finance = Finance(this)
+
+    class Finance(private val chance: Chance) {
+
+        @JvmOverloads
+        fun currency(abbreviation: Boolean = false): String {
+            return if (abbreviation) {
+                Currency.all.random().toString()
+            } else {
+                Currency.all.random().currencyName
             }
         }
     }
