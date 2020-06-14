@@ -35,6 +35,10 @@ annotation class DieProvider(val value: Int = 6)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class DiceProvider(val value: Int = 6, val rolls: Int = 3)
 
+@Target(AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FIELD, AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class IpProvider
+
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Field(val value: String)
 

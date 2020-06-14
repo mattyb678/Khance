@@ -28,6 +28,8 @@ class TestChanceProviders {
 
     private static final Pattern HASH_MIXED_PATTERN = Pattern.compile("^[0-9A-Fa-f]{40}$");
 
+    private static final Pattern IP_PATTERN = Pattern.compile("^\\d{1,3}.\\d{1,3}.\\d{1,3}.\\d{1,3}$");
+
     @ChanceProvider
     private Chance chance;
 
@@ -132,6 +134,12 @@ class TestChanceProviders {
         for (Integer d10Roll : d10Rolls) {
             assertThat(d10Roll, allOf(greaterThan(0), lessThan(11)));
         }
+    }
+
+    @RepeatedTest(25)
+    void testIp(@IpProvider String ipAddress) {
+        System.out.println(ipAddress);
+        assertThat(ipAddress, matchesPattern(IP_PATTERN));
     }
 
     @Test

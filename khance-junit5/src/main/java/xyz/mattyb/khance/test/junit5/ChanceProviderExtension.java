@@ -20,7 +20,7 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
         Parameter param = paramCtx.getParameter();
         return isAnnotated(param, BoolProvider.class, IntegerProvider.class, ChanceProvider.class,
                 NaturalProvider.class, StringProvider.class, HashProvider.class, DieProvider.class,
-                DiceProvider.class);
+                DiceProvider.class, IpProvider.class);
     }
 
     @Override
@@ -48,6 +48,10 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
         if (isAnnotated(param, HashProvider.class) && assignable(param, String.class, CharSequence.class)) {
             HashProvider provider = param.getAnnotation(HashProvider.class);
             return chance.hash(provider.length(), provider.casing());
+        }
+        if (isAnnotated(param, IpProvider.class) && assignable(param, String.class, CharSequence.class)) {
+            IpProvider provider = param.getAnnotation(IpProvider.class);
+            return chance.web.ip();
         }
         if (isAnnotated(param, DieProvider.class) && assignable(param, Integer.class, int.class)) {
             DieProvider provider = param.getAnnotation(DieProvider.class);
