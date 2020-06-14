@@ -9,6 +9,7 @@ import xyz.mattyb.khance.test.core.annotations.*;
 import xyz.mattyb.khance.test.junit5.ChanceProviderExtension;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Pattern;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -16,7 +17,15 @@ import static xyz.mattyb.khance.test.utils.MatchesPattern.matchesPattern;
 import static xyz.mattyb.khance.test.utils.TestUtils.thousand;
 
 @ExtendWith(ChanceProviderExtension.class)
-public class TestChanceProviders {
+class TestChanceProviders {
+
+    private static final Pattern HASH_PATTERN = Pattern.compile("^[0-9a-f]{40}$");
+
+    private static final Pattern HASH_LENGTH_PATTERN = Pattern.compile("^[0-9a-f]{15}$");
+
+    private static final Pattern HASH_UPPER_PATTERN = Pattern.compile("^[0-9A-F]{40}$");
+
+    private static final Pattern HASH_MIXED_PATTERN = Pattern.compile("^[0-9A-Fa-f]{40}$");
 
     @ChanceProvider
     private Chance chance;
@@ -89,6 +98,26 @@ public class TestChanceProviders {
     @RepeatedTest(10)
     public void testString_Length(@StringProvider(length = 22) String str) {
         assertThat(str.length(), is(22));
+    }
+
+    @RepeatedTest(25)
+    void testHash(@HashProvider String hash) {
+        assertThat(hash, matchesPattern(HASH_PATTERN));
+    }
+
+    @RepeatedTest(25)
+    void testHash_Length(@HashProvider(length = 15) String hash) {
+        assertThat(hash, matchesPattern(HASH_LENGTH_PATTERN));
+    }
+
+    @RepeatedTest(25)
+    void testHash_Upper(@HashProvider(casing = Casing.UPPER) String hash) {
+        assertThat(hash, matchesPattern(HASH_UPPER_PATTERN));
+    }
+
+    @RepeatedTest(25)
+    void testHash_Mixed(@HashProvider(casing = Casing.MIXED) String hash) {
+        assertThat(hash, matchesPattern(HASH_MIXED_PATTERN));
     }
 
     @Test

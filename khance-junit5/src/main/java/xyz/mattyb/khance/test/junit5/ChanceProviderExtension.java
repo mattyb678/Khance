@@ -16,7 +16,7 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
     public boolean supportsParameter(ParameterContext paramCtx, ExtensionContext extCtx) throws ParameterResolutionException {
         Parameter param = paramCtx.getParameter();
         return isAnnotated(param, BoolProvider.class, IntegerProvider.class, ChanceProvider.class, NaturalProvider.class,
-                StringProvider.class);
+                StringProvider.class, HashProvider.class);
     }
 
     @Override
@@ -40,6 +40,10 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
         if (isAnnotated(param, IntegerProvider.class) && assignable(param, Integer.class, int.class)) {
             IntegerProvider provider = param.getAnnotation(IntegerProvider.class);
             return chance.integer(provider.min(), provider.max());
+        }
+        if (isAnnotated(param, HashProvider.class) && assignable(param, String.class, CharSequence.class)) {
+            HashProvider provider = param.getAnnotation(HashProvider.class);
+            return chance.hash(provider.length(), provider.casing());
         }
         if (isAnnotated(param, NaturalProvider.class) && assignable(param, Integer.class, int.class)) {
             NaturalProvider provider = param.getAnnotation(NaturalProvider.class);

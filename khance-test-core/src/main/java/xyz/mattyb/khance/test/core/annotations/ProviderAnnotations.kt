@@ -23,6 +23,10 @@ annotation class NaturalProvider(val min: Int = 0, val max: Int = Int.MAX_VALUE,
 @Retention(AnnotationRetention.RUNTIME)
 annotation class StringProvider(val length: Int = -1, val casing: Casing = Casing.LOWER, val field: Field = Field(""))
 
+@Target(AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FIELD, AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class HashProvider(val length: Int = -1, val casing: Casing = Casing.LOWER)
+
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Field(val value: String)
 
