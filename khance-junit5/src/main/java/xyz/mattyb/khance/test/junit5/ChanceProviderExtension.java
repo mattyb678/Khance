@@ -7,16 +7,20 @@ import xyz.mattyb.khance.ChanceFactory;
 import xyz.mattyb.khance.test.core.annotations.*;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.*;
 import java.lang.reflect.Field;
-import java.lang.reflect.Parameter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ChanceProviderExtension implements ParameterResolver, TestInstancePostProcessor {
     @Override
     public boolean supportsParameter(ParameterContext paramCtx, ExtensionContext extCtx) throws ParameterResolutionException {
         Parameter param = paramCtx.getParameter();
-        return isAnnotated(param, BoolProvider.class, IntegerProvider.class, ChanceProvider.class, NaturalProvider.class,
-                StringProvider.class, HashProvider.class);
+        return isAnnotated(param, BoolProvider.class, IntegerProvider.class, ChanceProvider.class,
+                NaturalProvider.class, StringProvider.class, HashProvider.class, DieProvider.class,
+                DiceProvider.class);
     }
 
     @Override
@@ -44,6 +48,26 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
         if (isAnnotated(param, HashProvider.class) && assignable(param, String.class, CharSequence.class)) {
             HashProvider provider = param.getAnnotation(HashProvider.class);
             return chance.hash(provider.length(), provider.casing());
+        }
+        if (isAnnotated(param, DieProvider.class) && assignable(param, Integer.class, int.class)) {
+            DieProvider provider = param.getAnnotation(DieProvider.class);
+            int limit = 6;
+            if (provider.value() > 0) {
+                limit = provider.value();
+            }
+            return chance.dice.die(limit);
+        }
+        if (isAnnotated(param, DiceProvider.class) && assignableList(param, Integer.class)) {
+            DiceProvider provider = param.getAnnotation(DiceProvider.class);
+            int limit = 6;
+            if (provider.value() > 0) {
+                limit = provider.value();
+            }
+            int rolls = 3;
+            if (provider.rolls() > 0) {
+                rolls = provider.rolls();
+            }
+            return chance.dice.die(limit, rolls);
         }
         if (isAnnotated(param, NaturalProvider.class) && assignable(param, Integer.class, int.class)) {
             NaturalProvider provider = param.getAnnotation(NaturalProvider.class);
@@ -77,6 +101,20 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
             }
         }
         return false;
+    }
+
+    private boolean assignableList(
+            Parameter param,
+            Class<?>... genericTypes
+    ) {
+        boolean isCollection = param.getType().isAssignableFrom(List.class);
+        ParameterizedType parameterizedType = (ParameterizedType) param.getParameterizedType();
+        List<String> genericNames = Arrays.stream(genericTypes)
+                .map(Class::getName)
+                .collect(Collectors.toList());
+        boolean genericsMatch = Arrays.stream(parameterizedType.getActualTypeArguments())
+                .allMatch(typeArg -> genericNames.contains(typeArg.getTypeName()));
+        return isCollection && genericsMatch;
     }
 
     private boolean assignable(Parameter param, Class<?>... checks) {

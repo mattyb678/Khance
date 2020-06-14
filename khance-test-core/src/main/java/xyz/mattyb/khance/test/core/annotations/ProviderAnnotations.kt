@@ -27,6 +27,14 @@ annotation class StringProvider(val length: Int = -1, val casing: Casing = Casin
 @Retention(AnnotationRetention.RUNTIME)
 annotation class HashProvider(val length: Int = -1, val casing: Casing = Casing.LOWER)
 
+@Target(AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FIELD, AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class DieProvider(val value: Int = 6)
+
+@Target(AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FIELD, AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class DiceProvider(val value: Int = 6, val rolls: Int = 3)
+
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Field(val value: String)
 

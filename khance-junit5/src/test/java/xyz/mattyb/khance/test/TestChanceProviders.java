@@ -8,6 +8,7 @@ import xyz.mattyb.khance.enums.Casing;
 import xyz.mattyb.khance.test.core.annotations.*;
 import xyz.mattyb.khance.test.junit5.ChanceProviderExtension;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
@@ -118,6 +119,19 @@ class TestChanceProviders {
     @RepeatedTest(25)
     void testHash_Mixed(@HashProvider(casing = Casing.MIXED) String hash) {
         assertThat(hash, matchesPattern(HASH_MIXED_PATTERN));
+    }
+
+    @RepeatedTest(25)
+    void testDie(@DieProvider(8) int d8) {
+        assertThat(d8, allOf(greaterThan(0), lessThan(9)));
+    }
+
+    @RepeatedTest(25)
+    void testDice(@DiceProvider(value = 10, rolls = 5) List<Integer> d10Rolls) {
+        assertThat(d10Rolls, hasSize(5));
+        for (Integer d10Roll : d10Rolls) {
+            assertThat(d10Roll, allOf(greaterThan(0), lessThan(11)));
+        }
     }
 
     @Test
