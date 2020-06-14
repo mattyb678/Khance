@@ -1,5 +1,6 @@
 package xyz.mattyb.khance;
 
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import xyz.mattyb.khance.enums.Continent;
 import xyz.mattyb.khance.enums.CountryCode;
@@ -13,10 +14,13 @@ import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.not;
 import static xyz.mattyb.khance.test.utils.MatchesPattern.matchesPattern;
 import static xyz.mattyb.khance.test.utils.TestUtils.thousand;
 
 class LocationTest extends BaseChanceTest {
+
+    private static final Pattern STATE_ABBREV_PATTERN = Pattern.compile("[A-Z]{2}");
 
     @Test
     void testCity() {
@@ -107,5 +111,15 @@ class LocationTest extends BaseChanceTest {
             String allZip = chance.location.zip();
             assertThat(allZip, matchesPattern(zipPattern));
         });
+    }
+
+    @RepeatedTest(100)
+    void testState() {
+        assertThat(chance.location.state(), not(matchesPattern(STATE_ABBREV_PATTERN)));
+    }
+
+    @RepeatedTest(100)
+    void testState_Abbreviation() {
+        assertThat(chance.location.state(true), matchesPattern(STATE_ABBREV_PATTERN));
     }
 }

@@ -408,6 +408,16 @@ class Chance(private val seed: Long = Random().nextLong()) {
                 CountryCode.all.random().fullName
             }
         }
+
+        @JvmOverloads
+        fun state(abbreviation: Boolean = false): String {
+            val state = State.values().random()
+            return if (abbreviation) {
+                state.toString()
+            } else {
+                state.fullName
+            }
+        }
     }
 
     /******************** Finance ********************/
