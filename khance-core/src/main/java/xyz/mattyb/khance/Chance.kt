@@ -357,6 +357,10 @@ class Chance(private val seed: Long = Random().nextLong()) {
             val fourth = chance.natural(1, 254)
             return "$first.$second.$third.$fourth"
         }
+
+        fun ipv6(): String {
+            return (1..8).joinToString(":") { chance.hash(4) }
+        }
     }
 
     /******************** Location ********************/

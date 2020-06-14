@@ -4,8 +4,11 @@ import org.junit.jupiter.api.Test;
 import xyz.mattyb.khance.enums.TldType;
 import xyz.mattyb.khance.testutils.BaseChanceTest;
 
+import java.util.regex.Pattern;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static xyz.mattyb.khance.test.utils.MatchesPattern.matchesPattern;
 import static xyz.mattyb.khance.test.utils.TestUtils.thousand;
 
 public class WebTest extends BaseChanceTest {
@@ -25,6 +28,12 @@ public class WebTest extends BaseChanceTest {
             int fourth = Integer.parseInt(parts[3]);
             assertThat(fourth, allOf(greaterThan(0), lessThan(255)));
         });
+    }
+
+    @Test
+    void testIpv6() {
+        Pattern ipv6Pattern = Pattern.compile("([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}");
+        thousand(i -> assertThat(chance.web.ipv6(), matchesPattern(ipv6Pattern)));
     }
 
     @Test
