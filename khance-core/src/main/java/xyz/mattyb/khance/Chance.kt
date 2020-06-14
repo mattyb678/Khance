@@ -371,6 +371,17 @@ class Chance(private val seed: Long = Random().nextLong()) {
     class Location(private val chance: Chance) {
 
         @JvmOverloads
+        fun zip(vararg states: State = arrayOf()): String {
+            val statesToUse = if (states.isEmpty()) {
+                State.values()
+            } else {
+                states
+            }
+            val zipCodeRange = statesToUse.random().zipCodeRange.random()
+            return zipCodeRange.random().toString().padStart(5, '0')
+        }
+
+        @JvmOverloads
         fun city(vararg continents: Continent = arrayOf(Continent.AFRICA, Continent.ASIA,
                 Continent.AUSTRALIA, Continent.EUROPE, Continent.NORTH_AMERICA,
                 Continent.SOUTH_AMERICA)): String {

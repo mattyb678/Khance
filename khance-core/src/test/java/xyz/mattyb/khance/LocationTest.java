@@ -3,14 +3,17 @@ package xyz.mattyb.khance;
 import org.junit.jupiter.api.Test;
 import xyz.mattyb.khance.enums.Continent;
 import xyz.mattyb.khance.enums.CountryCode;
+import xyz.mattyb.khance.enums.State;
 import xyz.mattyb.khance.testutils.BaseChanceTest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static xyz.mattyb.khance.test.utils.MatchesPattern.matchesPattern;
 import static xyz.mattyb.khance.test.utils.TestUtils.thousand;
 
 class LocationTest extends BaseChanceTest {
@@ -91,6 +94,18 @@ class LocationTest extends BaseChanceTest {
         thousand(i -> {
             String countryCode = chance.location.country(true);
             assertThat(countries, hasItem(countryCode));
+        });
+    }
+
+    @Test
+    void testZip() {
+        Pattern utahPattern = Pattern.compile("84\\d{3}");
+        Pattern zipPattern = Pattern.compile("\\d{5}");
+        thousand(i -> {
+            String utahZip = chance.location.zip(State.UT);
+            assertThat(utahZip, matchesPattern(utahPattern));
+            String allZip = chance.location.zip();
+            assertThat(allZip, matchesPattern(zipPattern));
         });
     }
 }
