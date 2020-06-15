@@ -138,7 +138,6 @@ class TestChanceProviders {
 
     @RepeatedTest(25)
     void testIp(@IpProvider String ipAddress) {
-        System.out.println(ipAddress);
         assertThat(ipAddress, matchesPattern(IP_PATTERN));
     }
 

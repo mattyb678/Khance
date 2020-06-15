@@ -25,12 +25,12 @@ class LocationTest extends BaseChanceTest {
     @Test
     void testCity() {
         List<String> cities = new ArrayList<>();
-        cities.addAll(CityNamesKt.getAfricanCityNames());
-        cities.addAll(CityNamesKt.getAsianCityNames());
-        cities.addAll(CityNamesKt.getAustralianCityNames());
-        cities.addAll(CityNamesKt.getEuropeanCityNames());
-        cities.addAll(CityNamesKt.getNorthAmericanCityNames());
-        cities.addAll(CityNamesKt.getSouthAmericanCityNames());
+        cities.addAll(CityNames.getAfricanCityNames());
+        cities.addAll(CityNames.getAsianCityNames());
+        cities.addAll(CityNames.getAustralianCityNames());
+        cities.addAll(CityNames.getEuropeanCityNames());
+        cities.addAll(CityNames.getNorthAmericanCityNames());
+        cities.addAll(CityNames.getSouthAmericanCityNames());
         thousand(i -> {
             String cityName = chance.location.city();
             assertThat(cities, hasItem(cityName));
@@ -41,7 +41,7 @@ class LocationTest extends BaseChanceTest {
     void testCity_Africa() {
         thousand(i -> {
             String cityName = chance.location.city(Continent.AFRICA);
-            assertThat(CityNamesKt.getAfricanCityNames(), hasItem(cityName));
+            assertThat(CityNames.getAfricanCityNames(), hasItem(cityName));
         });
     }
 
@@ -49,7 +49,7 @@ class LocationTest extends BaseChanceTest {
     void testCity_Asia() {
         thousand(i -> {
             String cityName = chance.location.city(Continent.ASIA);
-            assertThat(CityNamesKt.getAsianCityNames(), hasItem(cityName));
+            assertThat(CityNames.getAsianCityNames(), hasItem(cityName));
         });
     }
 
@@ -57,7 +57,7 @@ class LocationTest extends BaseChanceTest {
     void testCity_Australia() {
         thousand(i -> {
             String cityName = chance.location.city(Continent.AUSTRALIA);
-            assertThat(CityNamesKt.getAustralianCityNames(), hasItem(cityName));
+            assertThat(CityNames.getAustralianCityNames(), hasItem(cityName));
         });
     }
 
@@ -65,7 +65,7 @@ class LocationTest extends BaseChanceTest {
     void testCity_NorthAmerica() {
         thousand(i -> {
             String cityName = chance.location.city(Continent.NORTH_AMERICA);
-            assertThat(CityNamesKt.getNorthAmericanCityNames(), hasItem(cityName));
+            assertThat(CityNames.getNorthAmericanCityNames(), hasItem(cityName));
         });
     }
 
@@ -73,7 +73,7 @@ class LocationTest extends BaseChanceTest {
     void testCity_SouthAmerica() {
         thousand(i -> {
             String cityName = chance.location.city(Continent.SOUTH_AMERICA);
-            assertThat(CityNamesKt.getSouthAmericanCityNames(), hasItem(cityName));
+            assertThat(CityNames.getSouthAmericanCityNames(), hasItem(cityName));
         });
     }
 

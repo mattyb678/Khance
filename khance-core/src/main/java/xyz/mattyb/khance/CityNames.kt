@@ -1,6 +1,8 @@
+@file:JvmName("CityNames")
+
 package xyz.mattyb.khance
 
-internal val africanCityNames = listOf(
+val africanCityNames = listOf(
         "Lagos", "Kinshasa", "Cairo", "Giza", "Johannesburg", "Dar es Salaam", "Alexandria",
         "Abidjan", "Nairobi", "Casablanca", "Cape Town", "Algiers", "Addis Ababa", "Kano",
         "Luanda", "Ibadan", "Aba", "Kumasi", "Douala", "Omdurman", "Yaoundé", "Bamako", "Lusaka",
@@ -17,7 +19,7 @@ internal val africanCityNames = listOf(
         "Kitwe", "Nansana"
 )
 
-internal val asianCityNames = listOf(
+val asianCityNames = listOf(
         "Shanghai", "Karachi", "Beijing", "Dhaka", "Delhi", "Istanbul", "Tokyo", "Mumbai",
         "Guangzhou", "Shenzhen", "Suzhou", "Jakarta", "Lahore", "Seoul", "Bengaluru", "Bangkok",
         "Dongguan", "Chongqing", "Nanjing", "Tehran", "Shenyang", "Ho Chi Minh City", "Hong Kong",
@@ -33,7 +35,7 @@ internal val asianCityNames = listOf(
         "Ranchi", "Chelyabinsk", "Krasnoyarsk", "Yerevan", "Tbilisi", "Nur-Sultan", "Shymkent"
 )
 
-internal val australianCityNames = listOf(
+val australianCityNames = listOf(
         "Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide", "Tweed Heads", "Maitland",
         "Queanbeyan", "Sunshine Coast", "Wollongong", "Geelong", "Hobart", "Townsville", "Cairns",
         "Darwin", "Toowoomba", "Ballarat", "Bendigo", "Albury", "Wodonga", "Launceston", "Mackay",
@@ -46,7 +48,7 @@ internal val australianCityNames = listOf(
         "Victor Harbor", "Taree", "Cooranbong", "Morisset", "Armidale", "Goulburn"
 )
 
-internal val europeanCityNames = listOf(
+val europeanCityNames = listOf(
         "Berlin", "Madrid", "Rome", "Bucharest", "Paris", "Vienna", "Hamburg", "Warsaw", "Budapest",
         "Barcelona", "Munich", "Milan", "Prague", "Sofia", "Cologne", "Stockholm", "Naples",
         "Turin", "Amsterdam", "Marseille", "Zagreb", "Valencia", "Kraków", "Frankfurt", "Seville",
@@ -61,7 +63,7 @@ internal val europeanCityNames = listOf(
         "Karlsruhe", "Catania", "Mannheim", "Nantes", "Galați", "Craiova"
 )
 
-internal val southAmericanCityNames = listOf(
+val southAmericanCityNames = listOf(
         "São Paulo", "Lima", "Bogotá", "Rio de Janeiro", "Santiago", "Caracas", "Buenos Aires",
         "Salvador", "Brasília", "Fortaleza", "Guayaquil", "Quito", "Belo Horizonte", "Medellín",
         "Cali", "Manaus", "Curitiba", "Maracaibo", "Recife", "Santa Cruz de la Sierra", "Belém",
@@ -77,7 +79,7 @@ internal val southAmericanCityNames = listOf(
         "Soacha", "Porto Velho"
 )
 
-internal val northAmericanCityNames = listOf(
+val northAmericanCityNames = listOf(
         "Mexico City", "New York City", "Los Angeles", "Toronto", "Chicago", "Houston", "Havana",
         "Montreal", "Ecatepec de Morelos", "Philadelphia", "Phoenix", "San Antonio", "Guadalajara",
         "Puebla", "San Diego", "Juárez", "León", "Dallas", "Tijuana", "Calgary", "Tegucigalpa",
