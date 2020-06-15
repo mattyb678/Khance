@@ -4,6 +4,8 @@ import xyz.mattyb.checkmate.CheckMate
 import xyz.mattyb.khance.dict.Dictionary
 import xyz.mattyb.khance.enums.*
 import xyz.mattyb.khance.enums.Currency
+import java.time.Instant
+import java.time.LocalDate
 import java.util.*
 import kotlin.math.floor
 
@@ -434,6 +436,19 @@ class Chance(private val seed: Long = Random().nextLong()) {
             } else {
                 Currency.all.random().currencyName
             }
+        }
+    }
+
+    /******************** Time ********************/
+
+    @JvmField
+    val time = Time(this)
+
+    class Time(private val chance: Chance) {
+
+        @JvmOverloads
+        fun year(min: Int = LocalDate.now().year, max: Int = LocalDate.now().year + 100): Int {
+            return chance.natural(min, max)
         }
     }
 }
