@@ -2,6 +2,7 @@ package xyz.mattyb.khance.test.core.annotations
 
 import xyz.mattyb.khance.enums.Casing
 import xyz.mattyb.khance.enums.Continent
+import xyz.mattyb.khance.enums.State
 import kotlin.reflect.KClass
 
 @Target(AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FIELD)
@@ -43,6 +44,10 @@ annotation class IpProvider
 @Target(AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FIELD, AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class CityProvider(val value: Array<Continent> = [])
+
+@Target(AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FIELD, AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class ZipProvider(val value: Array<State> = [])
 
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Field(val value: String)

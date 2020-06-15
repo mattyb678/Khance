@@ -20,7 +20,7 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
         Parameter param = paramCtx.getParameter();
         return isAnnotated(param, BoolProvider.class, IntegerProvider.class, ChanceProvider.class,
                 NaturalProvider.class, StringProvider.class, HashProvider.class, DieProvider.class,
-                DiceProvider.class, IpProvider.class, CityProvider.class);
+                DiceProvider.class, IpProvider.class, CityProvider.class, ZipProvider.class);
     }
 
     @Override
@@ -59,6 +59,14 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
                 return chance.location.city();
             } else {
                 return chance.location.city(provider.value());
+            }
+        }
+        if (isAnnotated(param, ZipProvider.class) && assignable(param, String.class, CharSequence.class)) {
+            ZipProvider provider = param.getAnnotation(ZipProvider.class);
+            if (provider.value().length == 0) {
+                return chance.location.zip();
+            } else {
+                return chance.location.zip(provider.value());
             }
         }
         if (isAnnotated(param, DieProvider.class) && assignable(param, Integer.class, int.class)) {

@@ -4,14 +4,18 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.extension.ExtendWith;
 import xyz.mattyb.khance.CityNames;
 import xyz.mattyb.khance.enums.Continent;
+import xyz.mattyb.khance.enums.State;
 import xyz.mattyb.khance.test.core.annotations.CityProvider;
+import xyz.mattyb.khance.test.core.annotations.ZipProvider;
 import xyz.mattyb.khance.test.junit5.ChanceProviderExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static xyz.mattyb.khance.test.utils.MatchesPattern.matchesPattern;
 
 @ExtendWith(ChanceProviderExtension.class)
 class TestLocationProviders {
@@ -85,5 +89,15 @@ class TestLocationProviders {
         assertThat(city, is(notNullValue()));
         assertThat(AMERICAN_CITIES, hasItem(city));
         assertThat(ALL_CITIES, hasItem(city));
+    }
+
+    @RepeatedTest(10)
+    void testZip(@ZipProvider String zip) {
+        assertThat(zip, matchesPattern("\\d{5}"));
+    }
+
+    @RepeatedTest(10)
+    void testZip_Colorado(@ZipProvider(State.CO) String zip) {
+        assertThat(zip, matchesPattern("802\\d{2}"));
     }
 }
