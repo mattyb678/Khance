@@ -447,6 +447,19 @@ class Chance(private val seed: Long = Random().nextLong()) {
     class Time(private val chance: Chance) {
 
         @JvmOverloads
+        fun month(abbreviation: Boolean = false): String {
+            return if (abbreviation) {
+                Month.all.random().abbreviation
+            } else {
+                Month.all.random().fullName
+            }
+        }
+
+        fun monthNumeric(): Int {
+            return Month.all.random().numeric
+        }
+
+        @JvmOverloads
         fun year(min: Int = LocalDate.now().year, max: Int = LocalDate.now().year + 100): Int {
             return chance.natural(min, max)
         }
