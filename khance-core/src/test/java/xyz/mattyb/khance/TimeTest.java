@@ -16,6 +16,22 @@ import static xyz.mattyb.khance.test.utils.TestUtils.times;
 class TimeTest extends BaseChanceTest {
 
     @Test
+    void testHour() {
+        times(120, i -> {
+            int hour = chance.time.hour();
+            assertThat(hour, allOf(greaterThanOrEqualTo(1), lessThanOrEqualTo(12)));
+        });
+    }
+
+    @Test
+    void testHour_TwentyFour() {
+        times(240, i -> {
+            int hour = chance.time.hour(true);
+            assertThat(hour, allOf(greaterThanOrEqualTo(1), lessThanOrEqualTo(24)));
+        });
+    }
+
+    @Test
     void testMonth() {
         List<String> monthNames = Month.all.stream()
                 .map(Month::getFullName)

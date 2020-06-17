@@ -447,6 +447,15 @@ class Chance(private val seed: Long = Random().nextLong()) {
     class Time(private val chance: Chance) {
 
         @JvmOverloads
+        fun hour(twentyFour: Boolean = false): Int {
+            return if (twentyFour) {
+                chance.natural(1, 24)
+            } else {
+                chance.natural(1, 12)
+            }
+        }
+
+        @JvmOverloads
         fun month(abbreviation: Boolean = false): String {
             return if (abbreviation) {
                 Month.all.random().abbreviation
