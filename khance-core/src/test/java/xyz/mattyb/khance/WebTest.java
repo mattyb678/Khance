@@ -14,7 +14,7 @@ import static xyz.mattyb.khance.test.utils.TestUtils.thousand;
 public class WebTest extends BaseChanceTest {
 
     @Test
-    public void testIp() {
+    void testIp() {
         thousand(i -> {
             String ip = chance.web.ip();
             String[] parts = ip.split("\\.");
@@ -37,22 +37,139 @@ public class WebTest extends BaseChanceTest {
     }
 
     @Test
-    public void testTld_Original() {
+    void testTld_Original() {
         thousand(i -> assertThat(TldsKt.getOriginalTlds(), hasItem(chance.web.tld())));
     }
 
     @Test
-    public void testTld_Country() {
+    void testTld_Brand() {
+        thousand(i -> assertThat(TldsKt.getBrandTlds(), hasItem(chance.web.tld(TldType.BRAND))));
+    }
+
+    @Test
+    void testTld_Country() {
         thousand(i -> assertThat(TldsKt.getCountryTlds(), hasItem(chance.web.tld(TldType.COUNTRY))));
     }
 
     @Test
-    public void testTld_Generic() {
+    void testTld_Generic() {
         thousand(i -> assertThat(TldsKt.getGenericTlds(), hasItem(chance.web.tld(TldType.GENERIC))));
     }
 
     @Test
-    public void testDomain() {
+    void testTld_GenericChinese() {
+        thousand(i -> {
+            String tld = chance.web.tld(TldType.GENERIC_CHINESE);
+            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+        });
+    }
+
+    @Test
+    void testTld_GenericFrench() {
+        thousand(i -> {
+            String tld = chance.web.tld(TldType.GENERIC_FRENCH);
+            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+        });
+    }
+
+    @Test
+    void testTld_GenericGerman() {
+        thousand(i -> {
+            String tld = chance.web.tld(TldType.GENERIC_GERMAN);
+            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+        });
+    }
+
+    @Test
+    void testTld_GenericHindi() {
+        thousand(i -> {
+            String tld = chance.web.tld(TldType.GENERIC_HINDI);
+            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+        });
+    }
+
+    @Test
+    void testTld_GenericItalian() {
+        thousand(i -> {
+            String tld = chance.web.tld(TldType.GENERIC_ITALIAN);
+            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+        });
+    }
+
+    @Test
+    void testTld_GenericPortuguese() {
+        thousand(i -> {
+            String tld = chance.web.tld(TldType.GENERIC_PORTUGUESE);
+            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+        });
+    }
+
+    @Test
+    void testTld_GenericSpanish() {
+        thousand(i -> {
+            String tld = chance.web.tld(TldType.GENERIC_SPANISH);
+            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+        });
+    }
+
+    @Test
+    void testTld_GeographicAfrica() {
+        thousand(i -> {
+            String tld = chance.web.tld(TldType.GEOGRAPHIC_AFRICA);
+            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+        });
+    }
+
+    @Test
+    void testTld_GeographicAsia() {
+        thousand(i -> {
+            String tld = chance.web.tld(TldType.GEOGRAPHIC_ASIA);
+            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+        });
+    }
+
+    @Test
+    void testTld_GeographicEurope() {
+        thousand(i -> {
+            String tld = chance.web.tld(TldType.GEOGRAPHIC_EUROPE);
+            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+        });
+    }
+
+    @Test
+    void testTld_GeographicNorthAmerica() {
+        thousand(i -> {
+            String tld = chance.web.tld(TldType.GEOGRAPHIC_NORTH_AMERICA);
+            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+        });
+    }
+
+    @Test
+    void testTld_GeographicOceania() {
+        thousand(i -> {
+            String tld = chance.web.tld(TldType.GEOGRAPHIC_OCEANIA);
+            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+        });
+    }
+
+    @Test
+    void testTld_GeographicSouthAmerica() {
+        thousand(i -> {
+            String tld = chance.web.tld(TldType.GEOGRAPHIC_SOUTH_AMERICA);
+            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+        });
+    }
+
+    @Test
+    void testTld_SpecialUse() {
+        thousand(i -> {
+            String tld = chance.web.tld(TldType.SPECIAL_USE);
+            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+        });
+    }
+
+    @Test
+    void testDomain() {
         thousand(i -> System.out.println(chance.web.domain()));
     }
 }
