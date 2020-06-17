@@ -68,7 +68,7 @@ public class WebTest extends BaseChanceTest {
     void testTld_GenericFrench() {
         thousand(i -> {
             String tld = chance.web.tld(TldType.GENERIC_FRENCH);
-            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+            assertThat(TldsKt.getGenericFrenchTlds(), hasItem(tld));
         });
     }
 
@@ -76,7 +76,7 @@ public class WebTest extends BaseChanceTest {
     void testTld_GenericGerman() {
         thousand(i -> {
             String tld = chance.web.tld(TldType.GENERIC_GERMAN);
-            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+            assertThat(TldsKt.getGenericGermanTlds(), hasItem(tld));
         });
     }
 
@@ -84,7 +84,7 @@ public class WebTest extends BaseChanceTest {
     void testTld_GenericHindi() {
         thousand(i -> {
             String tld = chance.web.tld(TldType.GENERIC_HINDI);
-            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+            assertThat(TldsKt.getGenericHindiTlds(), hasItem(tld));
         });
     }
 
@@ -92,7 +92,7 @@ public class WebTest extends BaseChanceTest {
     void testTld_GenericItalian() {
         thousand(i -> {
             String tld = chance.web.tld(TldType.GENERIC_ITALIAN);
-            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+            assertThat(TldsKt.getGenericItalianTlds(), hasItem(tld));
         });
     }
 
@@ -100,7 +100,7 @@ public class WebTest extends BaseChanceTest {
     void testTld_GenericPortuguese() {
         thousand(i -> {
             String tld = chance.web.tld(TldType.GENERIC_PORTUGUESE);
-            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+            assertThat(TldsKt.getGenericPortugueseTlds(), hasItem(tld));
         });
     }
 
@@ -108,7 +108,7 @@ public class WebTest extends BaseChanceTest {
     void testTld_GenericSpanish() {
         thousand(i -> {
             String tld = chance.web.tld(TldType.GENERIC_SPANISH);
-            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+            assertThat(TldsKt.getGenericSpanishTlds(), hasItem(tld));
         });
     }
 
@@ -116,7 +116,7 @@ public class WebTest extends BaseChanceTest {
     void testTld_GeographicAfrica() {
         thousand(i -> {
             String tld = chance.web.tld(TldType.GEOGRAPHIC_AFRICA);
-            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+            assertThat(TldsKt.getGeoAfricaTlds(), hasItem(tld));
         });
     }
 
@@ -124,7 +124,7 @@ public class WebTest extends BaseChanceTest {
     void testTld_GeographicAsia() {
         thousand(i -> {
             String tld = chance.web.tld(TldType.GEOGRAPHIC_ASIA);
-            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+            assertThat(TldsKt.getGeoAsiaTlds(), hasItem(tld));
         });
     }
 
@@ -132,7 +132,7 @@ public class WebTest extends BaseChanceTest {
     void testTld_GeographicEurope() {
         thousand(i -> {
             String tld = chance.web.tld(TldType.GEOGRAPHIC_EUROPE);
-            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+            assertThat(TldsKt.getGeoEuropeTlds(), hasItem(tld));
         });
     }
 
@@ -140,7 +140,7 @@ public class WebTest extends BaseChanceTest {
     void testTld_GeographicNorthAmerica() {
         thousand(i -> {
             String tld = chance.web.tld(TldType.GEOGRAPHIC_NORTH_AMERICA);
-            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+            assertThat(TldsKt.getGeoNorthAmericaTlds(), hasItem(tld));
         });
     }
 
@@ -148,7 +148,7 @@ public class WebTest extends BaseChanceTest {
     void testTld_GeographicOceania() {
         thousand(i -> {
             String tld = chance.web.tld(TldType.GEOGRAPHIC_OCEANIA);
-            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+            assertThat(TldsKt.getGeoOceaniaTlds(), hasItem(tld));
         });
     }
 
@@ -156,7 +156,7 @@ public class WebTest extends BaseChanceTest {
     void testTld_GeographicSouthAmerica() {
         thousand(i -> {
             String tld = chance.web.tld(TldType.GEOGRAPHIC_SOUTH_AMERICA);
-            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+            assertThat(TldsKt.getGeoSouthAmericaTlds(), hasItem(tld));
         });
     }
 
@@ -164,7 +164,7 @@ public class WebTest extends BaseChanceTest {
     void testTld_SpecialUse() {
         thousand(i -> {
             String tld = chance.web.tld(TldType.SPECIAL_USE);
-            assertThat(TldsKt.getGenericChineseTlds(), hasItem(tld));
+            assertThat(TldsKt.getSpecialUseTlds(), hasItem(tld));
         });
     }
 
