@@ -20,7 +20,9 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
         Parameter param = paramCtx.getParameter();
         return isAnnotated(param, BoolProvider.class, IntegerProvider.class, ChanceProvider.class,
                 NaturalProvider.class, StringProvider.class, HashProvider.class, DieProvider.class,
-                DiceProvider.class, IpProvider.class, CityProvider.class, ZipProvider.class);
+                DiceProvider.class, IpProvider.class, CityProvider.class, ZipProvider.class)
+                ||
+                timeAnnotation(param);
     }
 
     @Override
@@ -97,6 +99,14 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
                 return chance.natural(provider.min(), provider.max());
             }
         }
+        if (isAnnotated(param, HourProvider.class) && assignable(param, Integer.class, int.class)) {
+            HourProvider provider = param.getAnnotation(HourProvider.class);
+            if (provider.value()) {
+                return chance.time.hour(provider.value());
+            } else {
+                return chance.time.hour();
+            }
+        }
 
         return null;
     }
@@ -121,6 +131,10 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
             }
         }
         return false;
+    }
+
+    private final boolean timeAnnotation(AnnotatedElement param) {
+        return isAnnotated(param, HourProvider.class);
     }
 
     private boolean assignableList(
