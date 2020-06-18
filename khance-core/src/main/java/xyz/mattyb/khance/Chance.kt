@@ -246,9 +246,7 @@ class Chance(private val seed: Long = Random().nextLong()) {
         }
 
         fun gender(vararg extraGenders: String): String {
-            return listOf(*extraGenders)
-                    .plus(genders)
-                    .random()
+            return chance.random(listOf(*extraGenders).plus(genders))
         }
 
         @JvmOverloads
@@ -304,16 +302,19 @@ class Chance(private val seed: Long = Random().nextLong()) {
 
     class Employment(private val chance: Chance) {
 
+        companion object {
+            private val rankings = listOf("Apprentice", "Junior", "Senior", "Lead")
+        }
+
         fun company(): String {
-            return companies.random()
+            return chance.random(companies)
         }
 
         @JvmOverloads
         fun profession(includeRanking: Boolean = false): String {
-            val rankings = listOf("Apprentice", "Junior", "Senior", "Lead")
-            val profession = professions.random()
+            val profession = chance.random(professions)
             val rank = if (includeRanking) {
-                rankings.random() + " "
+                chance.random(rankings) + " "
             } else {
                 ""
             }
@@ -353,7 +354,7 @@ class Chance(private val seed: Long = Random().nextLong()) {
                     }
                 }
             }
-            return types.toSet().random()
+            return chance.random(types.toSet())
         }
 
         @JvmOverloads

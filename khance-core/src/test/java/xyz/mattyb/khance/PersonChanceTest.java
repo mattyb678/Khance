@@ -13,6 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static xyz.mattyb.khance.test.utils.TestUtils.thousand;
+import static xyz.mattyb.khance.test.utils.TestUtils.times;
 
 public class PersonChanceTest extends BaseChanceTest {
 
@@ -60,6 +61,17 @@ public class PersonChanceTest extends BaseChanceTest {
             }
         });
         assertThat(femaleCount.get(), is(allOf(greaterThan(200), lessThan(800))));
+    }
+
+    @Test
+    void testGender_Seeded() {
+        Chance seeded1 = ChanceFactory.chance(1999L);
+        Chance seeded2 = ChanceFactory.chance(1999L);
+        times(15, i -> {
+            String gender1 = seeded1.person.gender();
+            String gender2 = seeded2.person.gender();
+            assertThat(gender1, is(gender2));
+        });
     }
 
     @Test
