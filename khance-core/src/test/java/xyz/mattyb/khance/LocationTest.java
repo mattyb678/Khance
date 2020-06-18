@@ -13,10 +13,10 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 import static xyz.mattyb.khance.test.utils.MatchesPattern.matchesPattern;
 import static xyz.mattyb.khance.test.utils.TestUtils.thousand;
+import static xyz.mattyb.khance.test.utils.TestUtils.times;
 
 class LocationTest extends BaseChanceTest {
 
@@ -86,6 +86,28 @@ class LocationTest extends BaseChanceTest {
         thousand(i -> {
             String country = chance.location.country();
             assertThat(countries, hasItem(country));
+        });
+    }
+
+    @Test
+    void testCountry_Seeded() {
+        Chance seeded1 = ChanceFactory.chance(1986L);
+        Chance seeded2 = ChanceFactory.chance(1986L);
+        times(25, i -> {
+            String firstCountry = seeded1.location.country();
+            String secondCountry = seeded2.location.country();
+            assertThat(firstCountry, is(secondCountry));
+        });
+    }
+
+    @Test
+    void testCountry_CodeSeeded() {
+        Chance seeded1 = ChanceFactory.chance(1776L);
+        Chance seeded2 = ChanceFactory.chance(1776L);
+        times(25, i -> {
+            String firstCountry = seeded1.location.country(true);
+            String secondCountry = seeded2.location.country(true);
+            assertThat(firstCountry, is(secondCountry));
         });
     }
 

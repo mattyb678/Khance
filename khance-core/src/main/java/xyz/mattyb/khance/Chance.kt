@@ -18,6 +18,15 @@ class Chance(private val seed: Long = Random().nextLong()) {
         private const val HEX_CHARS: String = "0123456789abcedf"
     }
 
+    fun <T> random(collection: Collection<T>): T {
+        if (collection.isEmpty()) {
+            throw NoSuchElementException("Collection cannot be empty")
+        }
+        val limit = collection.size - 1
+        val randomIdx = natural(0, limit)
+        return collection.elementAt(randomIdx)
+    }
+
     @JvmOverloads
     fun bool(likelihood: Int = 50): Boolean {
         CheckMate.check().intValue(likelihood).between(0).and(100).inclusive().validate()
@@ -405,9 +414,9 @@ class Chance(private val seed: Long = Random().nextLong()) {
         @JvmOverloads
         fun country(code: Boolean = false): String {
             return if (code) {
-                CountryCode.all.random().toString()
+                chance.random(CountryCode.all).toString()
             } else {
-                CountryCode.all.random().fullName
+                chance.random(CountryCode.all).fullName
             }
         }
 
