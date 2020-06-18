@@ -4,6 +4,7 @@ import org.junit.jupiter.api.extension.*;
 import org.junit.platform.commons.support.AnnotationSupport;
 import xyz.mattyb.khance.Chance;
 import xyz.mattyb.khance.ChanceFactory;
+import xyz.mattyb.khance.enums.Month;
 import xyz.mattyb.khance.test.core.annotations.*;
 
 import java.lang.annotation.Annotation;
@@ -20,9 +21,8 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
         Parameter param = paramCtx.getParameter();
         return isAnnotated(param, BoolProvider.class, IntegerProvider.class, ChanceProvider.class,
                 NaturalProvider.class, StringProvider.class, HashProvider.class, DieProvider.class,
-                DiceProvider.class, IpProvider.class, CityProvider.class, ZipProvider.class)
-                ||
-                timeAnnotation(param);
+                DiceProvider.class, IpProvider.class)
+                || locationAnnotation(param) || timeAnnotation(param);
     }
 
     @Override
@@ -107,6 +107,18 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
                 return chance.time.hour();
             }
         }
+        if (isAnnotated(param, MonthProvider.class)) {
+            MonthProvider provider = param.getAnnotation(MonthProvider.class);
+            if (assignable(param, Integer.class, int.class)) {
+                return chance.time.monthNumeric();
+            } else if (assignable(param, String.class, CharSequence.class)) {
+                if (provider.value()) {
+                    return chance.time.month(provider.value());
+                } else {
+                    return chance.time.month();
+                }
+            }
+        }
 
         return null;
     }
@@ -133,8 +145,12 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
         return false;
     }
 
-    private final boolean timeAnnotation(AnnotatedElement param) {
-        return isAnnotated(param, HourProvider.class);
+    private boolean timeAnnotation(AnnotatedElement param) {
+        return isAnnotated(param, HourProvider.class, MonthProvider.class);
+    }
+
+    private boolean locationAnnotation(AnnotatedElement param) {
+        return isAnnotated(param, CityProvider.class, ZipProvider.class);
     }
 
     private boolean assignableList(
