@@ -5,6 +5,7 @@ import org.junit.platform.commons.support.AnnotationSupport;
 import xyz.mattyb.khance.Chance;
 import xyz.mattyb.khance.ChanceFactory;
 import xyz.mattyb.khance.enums.Month;
+import xyz.mattyb.khance.test.core.TimerProviderUtils;
 import xyz.mattyb.khance.test.core.annotations.*;
 
 import java.lang.annotation.Annotation;
@@ -112,11 +113,7 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
             if (assignable(param, Integer.class, int.class)) {
                 return chance.time.monthNumeric();
             } else if (assignable(param, String.class, CharSequence.class)) {
-                if (provider.value()) {
-                    return chance.time.month(provider.value());
-                } else {
-                    return chance.time.month();
-                }
+                return TimerProviderUtils.getMonth(provider, chance);
             }
         }
 
