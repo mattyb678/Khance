@@ -25,6 +25,7 @@ public class TimeProviderChanceRunner {
         List<String> months = Month.all.stream()
                 .map(Month::getFullName)
                 .collect(Collectors.toList());
+        System.out.println("TimeProviderChanceRunner.testMonth: " + month);
         assertThat(months, hasItem(month));
     }
 
