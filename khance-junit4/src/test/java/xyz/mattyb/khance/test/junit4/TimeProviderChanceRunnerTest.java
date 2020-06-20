@@ -12,7 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 
 @RunWith(ChanceRunner.class)
-public class TimeProviderChanceRunner {
+public class TimeProviderChanceRunnerTest {
 
     @MonthProvider
     private String month;

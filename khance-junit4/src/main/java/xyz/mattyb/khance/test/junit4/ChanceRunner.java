@@ -44,4 +44,9 @@ public class ChanceRunner extends BlockJUnit4ClassRunner implements Filterable {
             }
         };
     }
+
+    @Override
+    public void filter(Filter filter) throws NoTestsRemainException {
+        super.filter(filter);
+    }
 }
