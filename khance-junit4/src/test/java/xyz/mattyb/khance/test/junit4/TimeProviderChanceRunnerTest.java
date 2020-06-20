@@ -20,7 +20,13 @@ public class TimeProviderChanceRunnerTest {
     private Supplier<String> monthSupplier;
 
     @MonthProvider
+    private Supplier<Integer> monthNumericSupplier;
+
+    @MonthProvider
     private String month;
+
+    @MonthProvider
+    private int monthNumeric;
 
     @MonthProvider(true)
     private Supplier<String> monthAbbreviationSupplier;
@@ -49,6 +55,18 @@ public class TimeProviderChanceRunnerTest {
         times(120, i -> {
             String monthAbbreviation = monthAbbreviationSupplier.get();
             assertThat(abbreviations, hasItem(monthAbbreviation));
+        });
+    }
+
+    @Test
+    public void testMonth_Numeric() {
+        List<Integer> numerics = Month.all.stream()
+                .map(Month::getNumeric)
+                .collect(Collectors.toList());
+        assertThat(numerics, hasItem(monthNumeric));
+        times(120, i -> {
+            int monthNumeric = monthNumericSupplier.get();
+            assertThat(numerics, hasItem(monthNumeric));
         });
     }
 }

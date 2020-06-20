@@ -11,6 +11,10 @@ import xyz.mattyb.khance.test.core.annotations.MonthProvider;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
+import java.util.Arrays;
 import java.util.function.Supplier;
 
 public class ChanceRunner extends BlockJUnit4ClassRunner {
@@ -33,11 +37,22 @@ public class ChanceRunner extends BlockJUnit4ClassRunner {
                         if (annotation instanceof MonthProvider) {
                             MonthProvider provider = (MonthProvider) annotation;
                             field.setAccessible(true);
-                            Supplier<String> supplier = () -> TimerProviderUtils.getMonth(provider, chance);
+                            Supplier<String> stringSupplier =
+                                    () -> TimerProviderUtils.getMonth(provider, chance);
+                            Supplier<Integer> integerSupplier =
+                                    () -> TimerProviderUtils.getMonthNumeric(provider, chance);
                             if (field.getType() == Supplier.class) {
-                                field.set(target, supplier);
+                                ParameterizedType pType = ((ParameterizedType) field.getGenericType());
+                                Type argType = pType.getActualTypeArguments()[0];
+                                if (argType == String.class) {
+                                    field.set(target, stringSupplier);
+                                } else if (argType == Integer.class) {
+                                    field.set(target, integerSupplier);
+                                }
                             } else if (field.getType() == String.class) {
-                                field.set(target, supplier.get());
+                                field.set(target, stringSupplier.get());
+                            } else if (field.getType() == int.class || field.getType() == Integer.class) {
+                                field.set(target, integerSupplier.get());
                             }
                         }
                     }

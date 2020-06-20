@@ -11,3 +11,7 @@ fun MonthProvider.getMonth(chance: Chance): String {
         chance.time.month()
     }
 }
+
+fun MonthProvider.getMonthNumeric(chance: Chance): Int {
+    return chance.time.monthNumeric()
+}
