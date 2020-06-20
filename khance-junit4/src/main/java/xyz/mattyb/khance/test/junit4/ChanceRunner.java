@@ -1,9 +1,5 @@
 package xyz.mattyb.khance.test.junit4;
 
-import org.junit.runner.manipulation.Filter;
-import org.junit.runner.manipulation.Filterable;
-import org.junit.runner.manipulation.NoTestsRemainException;
-import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
@@ -17,7 +13,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.function.Supplier;
 
-public class ChanceRunner extends BlockJUnit4ClassRunner implements Filterable {
+public class ChanceRunner extends BlockJUnit4ClassRunner {
 
     private final Chance chance;
 
@@ -49,10 +45,5 @@ public class ChanceRunner extends BlockJUnit4ClassRunner implements Filterable {
                 base.evaluate();
             }
         };
-    }
-
-    @Override
-    public void filter(Filter filter) throws NoTestsRemainException {
-        super.filter(filter);
     }
 }
