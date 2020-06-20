@@ -15,6 +15,7 @@ import xyz.mattyb.khance.test.core.annotations.MonthProvider;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.function.Supplier;
 
 public class ChanceRunner extends BlockJUnit4ClassRunner implements Filterable {
 
@@ -36,7 +37,12 @@ public class ChanceRunner extends BlockJUnit4ClassRunner implements Filterable {
                         if (annotation instanceof MonthProvider) {
                             MonthProvider provider = (MonthProvider) annotation;
                             field.setAccessible(true);
-                            field.set(target, TimerProviderUtils.getMonth(provider, chance));
+                            Supplier<String> supplier = () -> TimerProviderUtils.getMonth(provider, chance);
+                            if (field.getType() == Supplier.class) {
+                                field.set(target, supplier);
+                            } else if (field.getType() == String.class) {
+                                field.set(target, supplier.get());
+                            }
                         }
                     }
                 }
