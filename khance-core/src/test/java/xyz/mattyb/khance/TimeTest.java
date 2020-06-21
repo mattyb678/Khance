@@ -16,6 +16,22 @@ import static xyz.mattyb.khance.test.utils.TestUtils.times;
 class TimeTest extends BaseChanceTest {
 
     @Test
+    void testMinute() {
+        times(240, i -> {
+            int minute = chance.time.minute();
+            assertThat(minute, allOf(greaterThanOrEqualTo(0), lessThanOrEqualTo(59)));
+        });
+    }
+
+    @Test
+    void testSecond() {
+        times(240, i -> {
+            int second = chance.time.second();
+            assertThat(second, allOf(greaterThanOrEqualTo(0), lessThanOrEqualTo(59)));
+        });
+    }
+
+    @Test
     void testHour() {
         times(120, i -> {
             int hour = chance.time.hour();
