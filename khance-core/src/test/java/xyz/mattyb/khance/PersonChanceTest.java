@@ -150,6 +150,18 @@ public class PersonChanceTest extends BaseChanceTest {
     }
 
     @Test
+    void testFirstName_Nationality() {
+        List<String> combined = new ArrayList<>();
+        combined.addAll(FirstNamesKt.ENG_MALE_FIRST_NAMES);
+        combined.addAll(FirstNamesKt.ENG_FEMALE_FIRST_NAMES);
+        thousand(i -> {
+            String name = chance.person.first(Nationality.UK, Nationality.USA);
+            assertThat(name, not(isEmptyOrNullString()));
+            assertThat(combined, hasItem(name));
+        });
+    }
+
+    @Test
     public void testFirstName_Female() {
         List<String> combined = new ArrayList<>();
         combined.addAll(FirstNamesKt.ENG_FEMALE_FIRST_NAMES);
