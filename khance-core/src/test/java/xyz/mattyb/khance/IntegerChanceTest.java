@@ -124,7 +124,7 @@ public class IntegerChanceTest extends BaseChanceTest {
         times(250, i -> {
             int prime = chance.prime();
             assertThat(prime, is(prime()));
-            assertThat(prime, allOf(greaterThanOrEqualTo(2), lessThanOrEqualTo(10_000)));
+            assertThat(prime, allOf(greaterThanOrEqualTo(2), lessThan(10_001)));
         });
     }
 
@@ -133,7 +133,7 @@ public class IntegerChanceTest extends BaseChanceTest {
         times(250, i -> {
             int prime = chance.prime(5000);
             assertThat(prime, is(prime()));
-            assertThat(prime, allOf(greaterThanOrEqualTo(5_000), lessThanOrEqualTo(10_000)));
+            assertThat(prime, allOf(greaterThanOrEqualTo(5_000), lessThan(10_001)));
         });
     }
 
@@ -142,7 +142,7 @@ public class IntegerChanceTest extends BaseChanceTest {
         times(250, i -> {
             int prime = chance.prime(90_000, 100_000);
             assertThat(prime, is(prime()));
-            assertThat(prime, allOf(greaterThanOrEqualTo(90_000), lessThanOrEqualTo(100_000)));
+            assertThat(prime, allOf(greaterThanOrEqualTo(90_000), lessThan(100_001)));
         });
     }
 }
