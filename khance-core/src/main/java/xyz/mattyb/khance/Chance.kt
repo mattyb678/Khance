@@ -280,8 +280,8 @@ class Chance(private val seed: Long = Random().nextLong()) {
 
         @JvmOverloads
         fun name(
-                middle: Boolean = false, middleInitial: Boolean = false, gender: Gender? = null,
-                vararg nationality: Nationality
+                vararg nationality: Nationality = arrayOf(), middle: Boolean = false,
+                middleInitial: Boolean = false, gender: Gender? = null
         ): String {
             val first = first(gender, *nationality)
             val middleName = when {

@@ -7,11 +7,13 @@ import xyz.mattyb.khance.enums.Nationality;
 import xyz.mattyb.khance.testutils.BaseChanceTest;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static xyz.mattyb.khance.test.utils.MatchesPattern.matchesPattern;
 import static xyz.mattyb.khance.test.utils.TestUtils.thousand;
 import static xyz.mattyb.khance.test.utils.TestUtils.times;
 
@@ -186,6 +188,127 @@ public class PersonChanceTest extends BaseChanceTest {
             String name = chance.person.first(Gender.MALE);
             assertThat(name, not(isEmptyOrNullString()));
             assertThat(combined, hasItem(name));
+        });
+    }
+
+    @Test
+    void testName() {
+        List<String> combinedFirstNames = new ArrayList<>();
+        combinedFirstNames.addAll(FirstNamesKt.ENG_MALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.ENG_FEMALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.ITALY_MALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.ITALY_FEMALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.NETHERLANDS_MALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.NETHERLANDS_FEMALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.FRANCE_MALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.FRANCE_FEMALE_FIRST_NAMES);
+
+        List<String> combinedLastNames = new ArrayList<>();
+        combinedLastNames.addAll(LastNamesKt.FRANCE_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.GERMANY_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.ITALY_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.JAPAN_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.NETHERLANDS_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.SPAIN_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.UK_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.USA_LAST_NAMES);
+        thousand(i -> {
+            String[] names = chance.person.name().split(" ", 2);
+            String firstName = names[0];
+            assertThat(combinedFirstNames, hasItem(firstName));
+
+            String lastName = names[1];
+            assertThat(combinedLastNames, hasItem(lastName));
+        });
+    }
+
+    @Test
+    void testName_MiddleName() {
+        List<String> combinedFirstNames = new ArrayList<>();
+        combinedFirstNames.addAll(FirstNamesKt.ENG_MALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.ENG_FEMALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.ITALY_MALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.ITALY_FEMALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.NETHERLANDS_MALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.NETHERLANDS_FEMALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.FRANCE_MALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.FRANCE_FEMALE_FIRST_NAMES);
+
+        List<String> combinedLastNames = new ArrayList<>();
+        combinedLastNames.addAll(LastNamesKt.FRANCE_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.GERMANY_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.ITALY_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.JAPAN_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.NETHERLANDS_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.SPAIN_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.UK_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.USA_LAST_NAMES);
+        thousand(i -> {
+            Nationality[] emptyNationality = new Nationality[]{};
+            String[] names = chance.person.name(emptyNationality, true)
+                    .split(" ", 3);
+            String firstName = names[0];
+            assertThat(combinedFirstNames, hasItem(firstName));
+
+            String middleName = names[1];
+            assertThat(combinedFirstNames, hasItem(middleName));
+
+            String lastName = names[2];
+            assertThat(combinedLastNames, hasItem(lastName));
+        });
+    }
+
+    @Test
+    void testName_MiddleInitial() {
+        List<String> combinedFirstNames = new ArrayList<>();
+        combinedFirstNames.addAll(FirstNamesKt.ENG_MALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.ENG_FEMALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.ITALY_MALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.ITALY_FEMALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.NETHERLANDS_MALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.NETHERLANDS_FEMALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.FRANCE_MALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.FRANCE_FEMALE_FIRST_NAMES);
+
+        List<String> combinedLastNames = new ArrayList<>();
+        combinedLastNames.addAll(LastNamesKt.FRANCE_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.GERMANY_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.ITALY_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.JAPAN_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.NETHERLANDS_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.SPAIN_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.UK_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.USA_LAST_NAMES);
+        thousand(i -> {
+            Nationality[] emptyNationality = new Nationality[]{};
+            String[] names = chance.person.name(emptyNationality, false, true)
+                    .split(" ", 3);
+            String firstName = names[0];
+            assertThat(combinedFirstNames, hasItem(firstName));
+
+            assertThat(names[1], matchesPattern("[A-Z]"));
+
+            String lastName = names[2];
+            assertThat(combinedLastNames, hasItem(lastName));
+        });
+    }
+
+    @Test
+    void testName_Nationality() {
+        List<String> combinedFirstNames = new ArrayList<>();
+        combinedFirstNames.addAll(FirstNamesKt.ENG_MALE_FIRST_NAMES);
+        combinedFirstNames.addAll(FirstNamesKt.ENG_FEMALE_FIRST_NAMES);
+
+        List<String> combinedLastNames = new ArrayList<>();
+        combinedLastNames.addAll(LastNamesKt.UK_LAST_NAMES);
+        combinedLastNames.addAll(LastNamesKt.USA_LAST_NAMES);
+        thousand(i -> {
+            String[] names = chance.person.name(Nationality.USA, Nationality.UK).split(" ", 2);
+            String firstName = names[0];
+            assertThat(combinedFirstNames, hasItem(firstName));
+
+            String lastName = names[1];
+            assertThat(combinedLastNames, hasItem(lastName));
         });
     }
 
