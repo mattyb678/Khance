@@ -8,7 +8,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static xyz.mattyb.khance.test.utils.IsPrime.prime;
 import static xyz.mattyb.khance.test.utils.TestUtils.thousand;
+import static xyz.mattyb.khance.test.utils.TestUtils.times;
 
 public class IntegerChanceTest extends BaseChanceTest {
 
@@ -115,5 +117,32 @@ public class IntegerChanceTest extends BaseChanceTest {
     @Test
     public void testNatural_ZeroNumeral() {
         assertThrows(IllegalArgumentException.class, () -> chance.naturalNumerals(0));
+    }
+
+    @Test
+    void testPrime() {
+        times(250, i -> {
+            int prime = chance.prime();
+            assertThat(prime, is(prime()));
+            assertThat(prime, allOf(greaterThanOrEqualTo(2), lessThanOrEqualTo(10_000)));
+        });
+    }
+
+    @Test
+    void testPrime_Min() {
+        times(250, i -> {
+            int prime = chance.prime(5000);
+            assertThat(prime, is(prime()));
+            assertThat(prime, allOf(greaterThanOrEqualTo(5_000), lessThanOrEqualTo(10_000)));
+        });
+    }
+
+    @Test
+    void testPrime_Range() {
+        times(250, i -> {
+            int prime = chance.prime(90_000, 100_000);
+            assertThat(prime, is(prime()));
+            assertThat(prime, allOf(greaterThanOrEqualTo(90_000), lessThanOrEqualTo(100_000)));
+        });
     }
 }

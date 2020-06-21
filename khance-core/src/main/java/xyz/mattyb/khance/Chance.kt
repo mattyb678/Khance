@@ -8,6 +8,7 @@ import java.time.Instant
 import java.time.LocalDate
 import java.util.*
 import kotlin.math.floor
+import kotlin.math.sqrt
 
 class Chance(private val seed: Long = Random().nextLong()) {
 
@@ -51,6 +52,34 @@ class Chance(private val seed: Long = Random().nextLong()) {
         val min: Int = 10.toThe(numerals - 1)
         val max: Int = (10.toThe(numerals)) - 1
         return natural(min, max)
+    }
+
+    @JvmOverloads
+    fun prime(min: Int = 2, max: Int = 10_000): Int {
+        tailrec fun internalPrime(primes: List<Int>, possiblePrimes: List<Int>): List<Int> {
+            return when {
+                possiblePrimes.isEmpty() -> primes
+                else -> {
+                    val prime = possiblePrimes.first()
+                    val sievedPossiblePrimes = possiblePrimes.filter { it % prime != 0 }
+                    internalPrime(primes + prime, sievedPossiblePrimes)
+                }
+            }
+        }
+        tailrec fun segment(segmentedPrimes: List<Int>, primes: List<Int>): List<Int> {
+            return when {
+                segmentedPrimes.isEmpty() -> primes
+                else -> {
+                    val prime = segmentedPrimes.first()
+                    val sievedPossiblePrimes = primes.filter { it % prime != 0 }
+                    segment(segmentedPrimes.drop(1), sievedPossiblePrimes)
+                }
+            }
+        }
+        val sqrt = sqrt(max.toDouble()).toInt()
+        val possible = (2..sqrt).toList()
+        val segmentedPrimes = internalPrime(emptyList(), possible)
+        return random(segment(segmentedPrimes, (min..max).toList()))
     }
 
     @JvmOverloads
