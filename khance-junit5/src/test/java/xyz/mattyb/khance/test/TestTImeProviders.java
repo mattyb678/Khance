@@ -3,9 +3,7 @@ package xyz.mattyb.khance.test;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.extension.ExtendWith;
 import xyz.mattyb.khance.enums.Month;
-import xyz.mattyb.khance.test.core.annotations.HourProvider;
-import xyz.mattyb.khance.test.core.annotations.MonthProvider;
-import xyz.mattyb.khance.test.core.annotations.YearProvider;
+import xyz.mattyb.khance.test.core.annotations.*;
 import xyz.mattyb.khance.test.junit5.ChanceProviderExtension;
 
 import java.time.LocalDate;
@@ -25,6 +23,16 @@ class TestTImeProviders {
     private static final List<String> monthsAbbr = Month.all.stream()
             .map(Month::getAbbreviation)
             .collect(Collectors.toList());
+
+    @RepeatedTest(240)
+    void testSecond(@SecondProvider int second) {
+        assertThat(second, allOf(greaterThanOrEqualTo(0), lessThanOrEqualTo(59)));
+    }
+
+    @RepeatedTest(240)
+    void testMinute(@MinuteProvider int minute) {
+        assertThat(minute, allOf(greaterThanOrEqualTo(0), lessThanOrEqualTo(59)));
+    }
 
     @RepeatedTest(120)
     void testHour(@HourProvider int hour) {
