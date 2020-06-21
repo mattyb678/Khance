@@ -10,6 +10,7 @@ import xyz.mattyb.khance.test.core.annotations.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.lang.reflect.Field;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -106,6 +107,18 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
                 return chance.time.hour();
             }
         }
+        if (isAnnotated(param, YearProvider.class) && assignable(param, Integer.class, int.class)) {
+            YearProvider provider = param.getAnnotation(YearProvider.class);
+            int min = LocalDate.now().getYear();
+            if (provider.min() >= 0) {
+                min = provider.min();
+            }
+            int max = LocalDate.now().getYear() + 100;
+            if (provider.max() >= 0) {
+                max = provider.max();
+            }
+            return chance.time.year(min, max);
+        }
         if (isAnnotated(param, MonthProvider.class)) {
             MonthProvider provider = param.getAnnotation(MonthProvider.class);
             if (assignable(param, Integer.class, int.class)) {
@@ -141,7 +154,7 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
     }
 
     private boolean timeAnnotation(AnnotatedElement param) {
-        return isAnnotated(param, HourProvider.class, MonthProvider.class);
+        return isAnnotated(param, HourProvider.class, MonthProvider.class, YearProvider.class);
     }
 
     private boolean locationAnnotation(AnnotatedElement param) {

@@ -5,8 +5,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import xyz.mattyb.khance.enums.Month;
 import xyz.mattyb.khance.test.core.annotations.HourProvider;
 import xyz.mattyb.khance.test.core.annotations.MonthProvider;
+import xyz.mattyb.khance.test.core.annotations.YearProvider;
 import xyz.mattyb.khance.test.junit5.ChanceProviderExtension;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,5 +49,22 @@ class TestTImeProviders {
     @RepeatedTest(120)
     void testMonth_Abbreviation(@MonthProvider(true) String month) {
         assertThat(monthsAbbr, hasItem(month));
+    }
+
+    @RepeatedTest(250)
+    void testYear(@YearProvider int year) {
+        int currentYear = LocalDate.now().getYear();
+        assertThat(year, allOf(greaterThan(currentYear - 1), lessThan(currentYear + 101)));
+    }
+
+    @RepeatedTest(50)
+    void testYear_Min(@YearProvider(min = 2090) int year) {
+        int currentYear = LocalDate.now().getYear();
+        assertThat(year, allOf(greaterThan(2089), lessThan(currentYear + 101)));
+    }
+
+    @RepeatedTest(50)
+    void testYear_Range(@YearProvider(min = 1990, max = 2000) int year) {
+        assertThat(year, allOf(greaterThan(1989), lessThan(2001)));
     }
 }

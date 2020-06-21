@@ -7,3 +7,7 @@ annotation class HourProvider(val value: Boolean = false)
 @Target(AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FIELD, AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class MonthProvider(val value: Boolean = false)
+
+@Target(AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FIELD, AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class YearProvider(val min: Int = -1, val max: Int = -1)
