@@ -8,37 +8,46 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static xyz.mattyb.khance.test.utils.MatchesPattern.matchesPattern;
-import static xyz.mattyb.khance.test.utils.TestUtils.thousand;
+import static xyz.mattyb.khance.test.utils.TestUtils.times;
 
 public class TextChanceTest extends BaseChanceTest {
 
     @Test
-    public void testString_LengthUnspecified() {
-        thousand(i -> assertThat(chance.string().length(), is(allOf(greaterThan(4), lessThan(21)))));
+    void testString_LengthUnspecified() {
+        times(250, i ->
+                assertThat(chance.string().length(), is(allOf(greaterThan(4), lessThan(21)))));
     }
 
     @Test
-    public void testString_NegativeLength() {
+    void testString_NegativeLength() {
         assertThrows(IllegalArgumentException.class, () -> chance.string(-5));
     }
 
     @Test
-    public void testString_ZeroLength() {
-        thousand(i -> assertThat(chance.string(0).length(), is(0)));
+    void testString_ZeroLength() {
+        times(250, i -> assertThat(chance.string(0).length(), is(0)));
     }
 
     @Test
-    public void testString_CasingDefault() {
-        thousand(i -> assertThat(chance.string(), matchesPattern("[a-z]+")));
+    void testString_CasingDefault() {
+        times(250, i -> assertThat(chance.string(), matchesPattern("[a-z]+")));
     }
 
     @Test
-    public void testString_CasingUpper() {
-        thousand(i -> assertThat(chance.string(Casing.UPPER), matchesPattern("[A-Z]+")));
+    void testString_CasingUpper() {
+        times(250, i ->
+                assertThat(chance.string(Casing.UPPER), matchesPattern("[A-Z]+")));
     }
 
     @Test
-    public void testString_CasingMixed() {
-        thousand(i -> assertThat(chance.string(Casing.MIXED), matchesPattern("[a-zA-Z]+")));
+    void testString_CasingMixed() {
+        times(250, i ->
+                assertThat(chance.string(Casing.MIXED), matchesPattern("[a-zA-Z]+")));
+    }
+
+    @Test
+    void testString_LengthCasing() {
+        times(250, i ->
+                assertThat(chance.string(13, Casing.UPPER), matchesPattern("[A-Z]{13}")));
     }
 }
