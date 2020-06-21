@@ -6,15 +6,14 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 import xyz.mattyb.khance.Chance;
 import xyz.mattyb.khance.ChanceFactory;
-import xyz.mattyb.khance.test.core.TimerProviderUtils;
+import xyz.mattyb.khance.test.core.TimeProviderUtils;
+import xyz.mattyb.khance.test.core.annotations.HourProvider;
 import xyz.mattyb.khance.test.core.annotations.MonthProvider;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
-import java.util.Arrays;
 import java.util.function.Supplier;
 
 public class ChanceRunner extends BlockJUnit4ClassRunner {
@@ -38,9 +37,9 @@ public class ChanceRunner extends BlockJUnit4ClassRunner {
                             MonthProvider provider = (MonthProvider) annotation;
                             field.setAccessible(true);
                             Supplier<String> stringSupplier =
-                                    () -> TimerProviderUtils.getMonth(provider, chance);
+                                    () -> TimeProviderUtils.getMonth(provider, chance);
                             Supplier<Integer> integerSupplier =
-                                    () -> TimerProviderUtils.getMonthNumeric(provider, chance);
+                                    () -> TimeProviderUtils.getMonthNumeric(provider, chance);
                             if (field.getType() == Supplier.class) {
                                 ParameterizedType pType = ((ParameterizedType) field.getGenericType());
                                 Type argType = pType.getActualTypeArguments()[0];
@@ -53,6 +52,16 @@ public class ChanceRunner extends BlockJUnit4ClassRunner {
                                 field.set(target, stringSupplier.get());
                             } else if (field.getType() == int.class || field.getType() == Integer.class) {
                                 field.set(target, integerSupplier.get());
+                            }
+                        } else if (annotation instanceof HourProvider) {
+                            HourProvider provider = (HourProvider) annotation;
+                            field.setAccessible(true);
+                            Supplier<Integer> supplier =
+                                     () -> TimeProviderUtils.getHour(provider, chance);
+                            if (field.getType() == Supplier.class) {
+                                field.set(target, supplier);
+                            } else if (field.getType() == int.class || field.getType() == Integer.class) {
+                                field.set(target, supplier.get());
                             }
                         }
                     }

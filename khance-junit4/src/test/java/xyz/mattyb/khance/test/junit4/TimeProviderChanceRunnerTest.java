@@ -3,6 +3,7 @@ package xyz.mattyb.khance.test.junit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import xyz.mattyb.khance.enums.Month;
+import xyz.mattyb.khance.test.core.annotations.HourProvider;
 import xyz.mattyb.khance.test.core.annotations.MonthProvider;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.*;
 import static xyz.mattyb.khance.test.utils.TestUtils.times;
 
 @RunWith(ChanceRunner.class)
@@ -33,6 +34,36 @@ public class TimeProviderChanceRunnerTest {
 
     @MonthProvider(true)
     private String monthAbbreviation;
+
+    @HourProvider
+    private int twelveHour;
+
+    @HourProvider
+    private Supplier<Integer> twelveHourSupplier;
+
+    @HourProvider
+    private Integer twentyFourHour;
+
+    @HourProvider
+    private Supplier<Integer> twentyFourHourSupplier;
+
+    @Test
+    public void testTwelveHour() {
+        assertThat(twelveHour, allOf(greaterThanOrEqualTo(1), lessThanOrEqualTo(12)));
+        times(48, i -> {
+            int twelveHour = twelveHourSupplier.get();
+            assertThat(twelveHour, allOf(greaterThanOrEqualTo(1), lessThanOrEqualTo(12)));
+        });
+    }
+
+    @Test
+    public void testTwentyFourHour() {
+        assertThat(twentyFourHour, allOf(greaterThanOrEqualTo(1), lessThanOrEqualTo(24)));
+        times(48, i -> {
+            Integer twentyFourHour = twentyFourHourSupplier.get();
+            assertThat(twentyFourHour, allOf(greaterThanOrEqualTo(1), lessThanOrEqualTo(24)));
+        });
+    }
 
     @Test
     public void testMonth() {

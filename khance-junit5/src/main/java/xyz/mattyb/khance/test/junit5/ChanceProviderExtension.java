@@ -4,14 +4,12 @@ import org.junit.jupiter.api.extension.*;
 import org.junit.platform.commons.support.AnnotationSupport;
 import xyz.mattyb.khance.Chance;
 import xyz.mattyb.khance.ChanceFactory;
-import xyz.mattyb.khance.enums.Month;
-import xyz.mattyb.khance.test.core.TimerProviderUtils;
+import xyz.mattyb.khance.test.core.TimeProviderUtils;
 import xyz.mattyb.khance.test.core.annotations.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -113,7 +111,7 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
             if (assignable(param, Integer.class, int.class)) {
                 return chance.time.monthNumeric();
             } else if (assignable(param, String.class, CharSequence.class)) {
-                return TimerProviderUtils.getMonth(provider, chance);
+                return TimeProviderUtils.getMonth(provider, chance);
             }
         }
 
