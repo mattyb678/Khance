@@ -2,8 +2,7 @@
 package xyz.mattyb.khance.test.core
 
 import xyz.mattyb.khance.Chance
-import xyz.mattyb.khance.test.core.annotations.HourProvider
-import xyz.mattyb.khance.test.core.annotations.MonthProvider
+import xyz.mattyb.khance.test.core.annotations.*
 
 fun MonthProvider.getMonth(chance: Chance): String {
     return if (this.value) {
@@ -13,9 +12,13 @@ fun MonthProvider.getMonth(chance: Chance): String {
     }
 }
 
-fun MonthProvider.getMonthNumeric(chance: Chance): Int {
-    return chance.time.monthNumeric()
-}
+fun MonthProvider.getMonthNumeric(chance: Chance): Int = chance.time.monthNumeric()
+
+fun MinuteProvider.getMinute(chance: Chance): Int = chance.time.minute()
+
+fun SecondProvider.getSecond(chance: Chance): Int = chance.time.second()
+
+fun MillisecondProvider.getMillisecond(chance: Chance): Int = chance.time.millisecond()
 
 fun HourProvider.getHour(chance: Chance): Int {
     return if (this.value) {

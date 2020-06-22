@@ -498,6 +498,8 @@ class Chance(private val seed: Long = Random().nextLong()) {
 
         fun second(): Int = chance.natural(0, 59)
 
+        fun millisecond(): Int = chance.natural(0, 999)
+
         @JvmOverloads
         fun month(abbreviation: Boolean = false): String {
             return if (abbreviation) {

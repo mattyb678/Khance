@@ -100,18 +100,17 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
             }
         }
         if (isAnnotated(param, MinuteProvider.class) && assignable(param, Integer.class, int.class)) {
-            return chance.time.minute();
+            return TimeProviderUtils.getMinute(param.getAnnotation(MinuteProvider.class), chance);
         }
         if (isAnnotated(param, SecondProvider.class) && assignable(param, Integer.class, int.class)) {
-            return chance.time.second();
+            return TimeProviderUtils.getSecond(param.getAnnotation(SecondProvider.class), chance);
+        }
+        if (isAnnotated(param, MillisecondProvider.class) && assignable(param, Integer.class, int.class)) {
+            return TimeProviderUtils.getMillisecond(param.getAnnotation(MillisecondProvider.class), chance);
         }
         if (isAnnotated(param, HourProvider.class) && assignable(param, Integer.class, int.class)) {
             HourProvider provider = param.getAnnotation(HourProvider.class);
-            if (provider.value()) {
-                return chance.time.hour(provider.value());
-            } else {
-                return chance.time.hour();
-            }
+            return TimeProviderUtils.getHour(provider, chance);
         }
         if (isAnnotated(param, YearProvider.class) && assignable(param, Integer.class, int.class)) {
             YearProvider provider = param.getAnnotation(YearProvider.class);
@@ -160,8 +159,8 @@ public class ChanceProviderExtension implements ParameterResolver, TestInstanceP
     }
 
     private boolean timeAnnotation(AnnotatedElement param) {
-        return isAnnotated(param, SecondProvider.class, MinuteProvider.class, HourProvider.class,
-                MonthProvider.class, YearProvider.class);
+        return isAnnotated(param, MillisecondProvider.class, SecondProvider.class,
+                MinuteProvider.class, HourProvider.class, MonthProvider.class, YearProvider.class);
     }
 
     private boolean locationAnnotation(AnnotatedElement param) {

@@ -32,6 +32,14 @@ class TimeTest extends BaseChanceTest {
     }
 
     @Test
+    void testMillisecond() {
+        times(2000, i -> {
+            int millisecond = chance.time.millisecond();
+            assertThat(millisecond, allOf(greaterThanOrEqualTo(0), lessThanOrEqualTo(999)));
+        });
+    }
+
+    @Test
     void testHour() {
         times(120, i -> {
             int hour = chance.time.hour();

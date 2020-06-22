@@ -24,6 +24,11 @@ class TestTImeProviders {
             .map(Month::getAbbreviation)
             .collect(Collectors.toList());
 
+    @RepeatedTest(2000)
+    void testMillisecond(@MillisecondProvider int millisecond) {
+        assertThat(millisecond, allOf(greaterThanOrEqualTo(0), lessThanOrEqualTo(999)));
+    }
+
     @RepeatedTest(240)
     void testSecond(@SecondProvider int second) {
         assertThat(second, allOf(greaterThanOrEqualTo(0), lessThanOrEqualTo(59)));
