@@ -485,6 +485,15 @@ class Chance(private val seed: Long = Random().nextLong()) {
 
     class Time(private val chance: Chance) {
 
+        fun period(): String {
+            val am = chance.bool(50)
+            return if (am) {
+                "am"
+            } else {
+                "pm"
+            }
+        }
+
         @JvmOverloads
         fun hour(twentyFour: Boolean = false): Int {
             return if (twentyFour) {

@@ -6,6 +6,7 @@ import xyz.mattyb.khance.testutils.BaseChanceTest;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,6 +15,19 @@ import static xyz.mattyb.khance.test.utils.TestUtils.thousand;
 import static xyz.mattyb.khance.test.utils.TestUtils.times;
 
 class TimeTest extends BaseChanceTest {
+
+    @Test
+    void testPeriod() {
+        final AtomicInteger am = new AtomicInteger(0);
+        thousand(i -> {
+            String period = chance.time.period();
+            assertThat(period, anyOf(is("am"), is("pm")));
+            if ("am".equals(period)) {
+                am.incrementAndGet();
+            }
+        });
+        assertThat(am.get(), is(allOf(greaterThan(200), lessThan(800))));
+    }
 
     @Test
     void testMinute() {
