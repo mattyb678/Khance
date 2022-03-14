@@ -46,7 +46,7 @@ class TestTImeProviders {
 
     @RepeatedTest(240)
     void testHour_TwentyFour(@HourProvider(true) Integer hour) {
-        assertThat(hour, allOf(greaterThanOrEqualTo(1), lessThanOrEqualTo(24)));
+        assertThat(hour, allOf(greaterThanOrEqualTo(0), lessThanOrEqualTo(23)));
     }
 
     @RepeatedTest(120)

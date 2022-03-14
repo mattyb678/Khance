@@ -4,8 +4,8 @@ import xyz.mattyb.checkmate.CheckMate
 import xyz.mattyb.khance.dict.Dictionary
 import xyz.mattyb.khance.enums.*
 import xyz.mattyb.khance.enums.Currency
-import java.time.Instant
 import java.time.LocalDate
+import java.time.LocalTime
 import java.util.*
 import kotlin.math.floor
 import kotlin.math.sqrt
@@ -485,19 +485,20 @@ class Chance(private val seed: Long = Random().nextLong()) {
 
     class Time(private val chance: Chance) {
 
-        fun period(): String {
+        @JvmOverloads
+        fun period(upper: Boolean = false): String {
             val am = chance.bool(50)
             return if (am) {
-                "am"
+                if (upper) "AM" else "am"
             } else {
-                "pm"
+                if (upper) "PM" else "pm"
             }
         }
 
         @JvmOverloads
         fun hour(twentyFour: Boolean = false): Int {
             return if (twentyFour) {
-                chance.natural(1, 24)
+                chance.natural(0, 23)
             } else {
                 chance.natural(1, 12)
             }
@@ -508,6 +509,28 @@ class Chance(private val seed: Long = Random().nextLong()) {
         fun second(): Int = chance.natural(0, 59)
 
         fun millisecond(): Int = chance.natural(0, 999)
+
+        @JvmOverloads
+        fun time(milliseconds: Boolean = false, twentyFour: Boolean = false): String {
+            val (hour, period) = if (twentyFour) {
+                hour(twentyFour) to ""
+            } else {
+                hour() to " ${period()}"
+            }
+            val minStr = minute().toString().padStart(2, '0')
+            val second = second().toString().padStart(2, '0')
+            val millisecond = if (milliseconds) {
+                ".${millisecond().toString().padStart(3, '0')}"
+            } else {
+                ""
+            }
+            val hourStr = hour.toString().padStart(2, '0')
+            return "$hourStr:$minStr:$second$millisecond$period"
+        }
+
+        fun localTime(): LocalTime {
+            return LocalTime.parse(time(twentyFour = true))
+        }
 
         @JvmOverloads
         fun month(abbreviation: Boolean = false): String {

@@ -30,6 +30,19 @@ class TimeTest extends BaseChanceTest {
     }
 
     @Test
+    void testPeriod_Upper() {
+        final AtomicInteger am = new AtomicInteger(0);
+        thousand(i -> {
+            String period = chance.time.period(true);
+            assertThat(period, anyOf(is("AM"), is("PM")));
+            if ("AM".equals(period)) {
+                am.incrementAndGet();
+            }
+        });
+        assertThat(am.get(), is(allOf(greaterThan(200), lessThan(800))));
+    }
+
+    @Test
     void testMinute() {
         times(240, i -> {
             int minute = chance.time.minute();
@@ -65,7 +78,7 @@ class TimeTest extends BaseChanceTest {
     void testHour_TwentyFour() {
         times(240, i -> {
             int hour = chance.time.hour(true);
-            assertThat(hour, allOf(greaterThanOrEqualTo(1), lessThanOrEqualTo(24)));
+            assertThat(hour, allOf(greaterThanOrEqualTo(0), lessThanOrEqualTo(23)));
         });
     }
 
@@ -105,6 +118,24 @@ class TimeTest extends BaseChanceTest {
             int currentYear = LocalDate.now().getYear();
             int year = chance.time.year();
             assertThat(year, allOf(greaterThan(currentYear - 1), lessThan(currentYear + 101)));
+        });
+    }
+
+    @Test
+    void testTime() {
+        times(250, i -> {
+            String time = chance.time.time();
+            assertThat(time.length(), is(11));
+            assertThat(time, anyOf(endsWith("pm"), endsWith("am")));
+        });
+    }
+
+    @Test
+    void testTime_Milliseconds() {
+        times(250, i -> {
+            String time = chance.time.time(true);
+            assertThat(time.length(), is(15));
+            assertThat(time, anyOf(endsWith("pm"), endsWith("am")));
         });
     }
 }
