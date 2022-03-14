@@ -20,7 +20,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <kotlin.version>1.3.72</kotlin.version>
+        <kotlin.version>1.6.10</kotlin.version>
         <junit.jupiter.version>5.1.1</junit.jupiter.version>
         <checkmate.version>0.0.5</checkmate.version>
         <apiguardian.version>1.0.0</apiguardian.version>
@@ -144,7 +144,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.5</version>
+                <version>0.8.7</version>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
